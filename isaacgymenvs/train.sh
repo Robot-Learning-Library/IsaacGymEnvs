@@ -2,7 +2,7 @@ DATE=`date '+%Y%m%d_%H%M'`
 echo "Save as: " $DATE
 
 # declare -a tasks=('FactoryTaskGears' 'FactoryTaskInsertion' 'FactoryTaskNutBoltPick' 'FactoryTaskNutBoltScrew')
-declare -a tasks=('FactoryTaskNutBoltPick' 'FactoryTaskNutBoltPlace' 'FactoryTaskNutBoltScrew')
+declare -a tasks=('FactoryTaskNutBoltScrew')
 
 mkdir -p log/$DATE
 for i in ${!tasks[@]}; do

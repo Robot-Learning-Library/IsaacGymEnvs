@@ -172,6 +172,12 @@ class FactoryTaskNutBoltScrew(FactoryEnvNutBolt, FactoryABCTask):
         self.rew_buf[:] = keypoint_reward * self.cfg_task.rl.keypoint_reward_scale \
                           - action_penalty * self.cfg_task.rl.action_penalty_scale \
                           + curr_successes * self.cfg_task.rl.success_bonus
+        
+        # In this policy, episode length is constant across all envs
+        is_last_step = (self.progress_buf[0] == self.max_episode_length - 1)
+
+        if is_last_step:
+            self.extras['successes'] = torch.mean(curr_successes.float())
 
     def reset_idx(self, env_ids):
         """Reset specified environments. Zero buffers."""

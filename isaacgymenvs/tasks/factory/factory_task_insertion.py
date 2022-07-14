@@ -41,6 +41,7 @@ import os
 import torch
 
 from isaacgym import gymapi, gymtorch
+import isaacgymenvs.tasks.factory.factory_control as fc
 from isaacgymenvs.tasks.factory.factory_env_insertion import FactoryEnvInsertion
 from isaacgymenvs.tasks.factory.factory_schema_class_task import FactoryABCTask
 from isaacgymenvs.tasks.factory.factory_schema_config_task import FactorySchemaConfigTask
@@ -55,6 +56,13 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
         self.cfg = cfg
         self._get_task_yaml_params()
+
+        self._acquire_task_tensors()
+        self.parse_controller_spec()
+
+        if self.cfg_task.sim.disable_gravity:
+            self.disable_gravity()
+
         if self.viewer != None:
             self._set_viewer_params()
         if self.cfg_base.mode.export_scene:
@@ -80,11 +88,72 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
     def _acquire_task_tensors(self):
         """Acquire tensors."""
+        # target_heights = self.cfg_base.env.table_height + self.bolt_head_heights + self.nut_heights * 0.5
+        # self.target_pos = target_heights * torch.tensor([0.0, 0.0, 1.0], device=self.device).repeat((self.num_envs, 1))
         pass
 
     def _refresh_task_tensors(self):
         """Refresh tensors."""
-        pass
+        self.fingerpad_midpoint_pos = fc.translate_along_local_z(pos=self.finger_midpoint_pos,
+                                                                 quat=self.hand_quat,
+                                                                 offset=self.asset_info_franka_table.franka_finger_length - self.asset_info_franka_table.franka_fingerpad_length * 0.5,
+                                                                 device=self.device)
+        self.finger_plug_keypoint_dist = self._get_keypoint_dist(body='finger_plug')
+        # self.plug_keypoint_dist = self._get_keypoint_dist(body='plug')
+
+        self.plug_dist_to_fingerpads = torch.norm(self.fingerpad_midpoint_pos - self.plug_pos, p=2,
+                                                 dim=-1)  # distance between plug and midpoint between centers of fingerpads
+        self.socket_dist_to_plug = torch.norm(self.plug_pos - self.socket_pos, p=2,
+                                                 dim=-1)  # distance between socket and plug between centers of fingerpads
+
+    def _get_keypoint_dist(self, body):
+        """Get keypoint distances."""
+
+        axis_length = self.asset_info_franka_table.franka_hand_length + self.asset_info_franka_table.franka_finger_length
+
+        if body == 'finger' or body == 'plug':
+            # Keypoint distance between finger/nut and target
+            if body == 'finger':
+                self.keypoint1 = self.fingertip_midpoint_pos
+                self.keypoint2 = fc.translate_along_local_z(pos=self.keypoint1,
+                                                            quat=self.fingertip_midpoint_quat,
+                                                            offset=-axis_length,
+                                                            device=self.device)
+
+            # elif body == 'plug':
+            #     self.keypoint1 = self.plug_pos
+            #     self.keypoint2 = fc.translate_along_local_z(pos=self.plug_pos,
+            #                                                 quat=self.plug_quat,
+            #                                                 offset=axis_length,
+            #                                                 device=self.device)
+
+            # self.keypoint1_targ = self.target_pos
+            # self.keypoint2_targ = self.keypoint1_targ + torch.tensor([0.0, 0.0, axis_length], device=self.device)
+
+        elif body == 'finger_plug':
+            # Keypoint distance between finger and plug
+            self.keypoint1 = self.fingerpad_midpoint_pos
+            self.keypoint2 = fc.translate_along_local_z(pos=self.keypoint1,
+                                                        quat=self.fingertip_midpoint_quat,
+                                                        offset=-axis_length,
+                                                        device=self.device)
+
+            self.keypoint1_targ = self.plug_pos
+            self.keypoint2_targ = fc.translate_along_local_z(pos=self.plug_pos,
+                                                             quat=self.plug_quat,
+                                                             offset=axis_length,
+                                                             device=self.device)
+
+        self.keypoint3 = self.keypoint1 + (self.keypoint2 - self.keypoint1) * 1.0 / 3.0
+        self.keypoint4 = self.keypoint1 + (self.keypoint2 - self.keypoint1) * 2.0 / 3.0
+        self.keypoint3_targ = self.keypoint1_targ + (self.keypoint2_targ - self.keypoint1_targ) * 1.0 / 3.0
+        self.keypoint4_targ = self.keypoint1_targ + (self.keypoint2_targ - self.keypoint1_targ) * 2.0 / 3.0
+        keypoint_dist = torch.norm(self.keypoint1_targ - self.keypoint1, p=2, dim=-1) \
+                        + torch.norm(self.keypoint2_targ - self.keypoint2, p=2, dim=-1) \
+                        + torch.norm(self.keypoint3_targ - self.keypoint3, p=2, dim=-1) \
+                        + torch.norm(self.keypoint4_targ - self.keypoint4, p=2, dim=-1)
+
+        return keypoint_dist
 
     def pre_physics_step(self, actions):
         """Reset environments. Apply actions from policy as position/rotation targets, force/torque targets, and/or PD gains."""
@@ -93,7 +162,12 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
         if len(env_ids) > 0:
             self.reset_idx(env_ids)
 
-        self._actions = actions.clone().to(self.device)  # shape = (num_envs, num_actions); values = [-1, 1]
+        self.actions = actions.clone().to(self.device)  # shape = (num_envs, num_actions); values = [-1, 1]
+
+        self._apply_actions_as_ctrl_targets(actions=self.actions,
+                                            ctrl_target_gripper_dof_pos=0.0,
+                                            do_scale=True)
+
 
     def post_physics_step(self):
         """Step buffers. Refresh tensors. Compute observations and reward."""
@@ -109,21 +183,76 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
     def compute_observations(self):
         """Compute observations."""
 
+        # Shallow copies of tensors
+        obs_tensors = [self.fingertip_midpoint_pos,
+                       self.fingertip_midpoint_quat,
+                       self.fingertip_midpoint_linvel,
+                       self.fingertip_midpoint_angvel,
+                       self.plug_pos,
+                       self.plug_quat,
+                       self.plug_linvel,
+                       self.plug_angvel,
+                       self.socket_pos,
+                       self.socket_quat
+                       ]
+
+        if self.cfg_task.rl.add_obs_finger_force:
+            obs_tensors += [self.left_finger_force, self.right_finger_force]
+
+        obs_tensors = torch.cat(obs_tensors, dim=-1)
+        self.obs_buf[:, :obs_tensors.shape[-1]] = obs_tensors  # shape = (num_envs, num_observations)
+
         return self.obs_buf  # shape = (num_envs, num_observations)
+
+    def _get_curr_successes(self):
+        """Get success mask at current timestep."""
+
+        curr_successes = torch.zeros((self.num_envs,), dtype=torch.bool, device=self.device)
+
+        # If nut is close enough to target pos
+        is_close = torch.where(self.socket_dist_to_plug < self.thread_pitches.squeeze(-1) * 4,
+                               torch.ones_like(curr_successes),
+                               torch.zeros_like(curr_successes))
+
+        curr_successes = torch.logical_or(curr_successes, is_close)
+
+        return curr_successes
+        
+    def _get_curr_failures(self, curr_successes):
+        """Get failure mask at current timestep."""
+        # TODO
+        curr_failures = torch.zeros((self.num_envs,), dtype=torch.bool, device=self.device)
+
+        return curr_failures
 
     def compute_reward(self):
         """Detect successes and failures. Update reward and reset buffers."""
+        # Get successful and failed envs at current timestep
+        curr_successes = self._get_curr_successes()
+        curr_failures = self._get_curr_failures(curr_successes)
 
-        self._update_rew_buf()
-        self._update_reset_buf()
+        self._update_rew_buf(curr_successes)
+        self._update_reset_buf(curr_failures)
 
-    def _update_rew_buf(self):
+    def _update_rew_buf(self, curr_successes):
         """Compute reward at current timestep."""
-        pass
+        keypoint_reward = -(self.finger_plug_keypoint_dist)
+        action_penalty = torch.norm(self.actions, p=2, dim=-1)
 
-    def _update_reset_buf(self):
+        self.rew_buf[:] = keypoint_reward * self.cfg_task.rl.keypoint_reward_scale \
+                          - action_penalty * self.cfg_task.rl.action_penalty_scale \
+                          + curr_successes * self.cfg_task.rl.success_bonus
+        
+        # In this policy, episode length is constant across all envs
+        is_last_step = (self.progress_buf[0] == self.max_episode_length - 1)
+
+        if is_last_step:
+            self.extras['successes'] = torch.mean(curr_successes.float())
+
+    def _update_reset_buf(self, curr_failures):
         """Assign environments for reset if successful or failed."""
-        pass
+        self.reset_buf[:] = curr_failures
+
 
     def reset_idx(self, env_ids):
         """Reset specified environments."""

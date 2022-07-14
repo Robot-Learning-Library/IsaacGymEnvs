@@ -24,6 +24,18 @@ randomize:
     franka_arm_initial_dof_pos: [1.5178e-03, -1.9651e-01, -1.4364e-03, -1.9761e+00, -2.7717e-04, 1.7796e+00, 7.8556e-01]
     nut_rot_initial: 30.0  # initial rotation of nut from configuration in CAD [deg]; default = 30.0 (gripper aligns with flat surfaces of nut)
 
+# apply DR
+# randomize: True
+
+# randomization_params:
+# frequency: 4096  # Define how many frames between generating new randomizations
+# observations:
+#     range: [0, .05]
+#     operation: "additive"
+#     distribution: "uniform"
+#     schedule: "constant"  # turn on noise after `schedule_steps` num steps
+#     schedule_steps: 5000
+
 rl:
     pos_action_scale: [0.1, 0.1, 0.1]
     rot_action_scale: [0.1, 0.1, 0.1]

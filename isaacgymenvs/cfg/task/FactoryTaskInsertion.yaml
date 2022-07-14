@@ -13,6 +13,8 @@ sim:
     dt: 0.016667  # required, but overridden in FactoryBase.yaml
     gravity: [0.0, 0.0, -9.81]  # required, but overridden in FactoryBase.yaml
 
+    disable_gravity: False
+
 env:
     numEnvs: 128
     numObservations: 32

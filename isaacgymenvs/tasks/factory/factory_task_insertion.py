@@ -397,7 +397,7 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
         self.ctrl_target_gripper_dof_pos = ctrl_target_gripper_dof_pos.unsqueeze(-1).repeat(1,2) # gripper action is symmetric for two pads: (a,a)
         if do_scale:
             self.ctrl_target_gripper_dof_pos = (self.ctrl_target_gripper_dof_pos + 1.) * 0.5  # range [0,1]
-
+        print(self.ctrl_target_gripper_dof_pos)
         self.generate_ctrl_signals()
 
     def _open_gripper(self, sim_steps=20):

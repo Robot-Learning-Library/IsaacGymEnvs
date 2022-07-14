@@ -29,6 +29,21 @@ randomize:
 
 rl:
     max_episode_length: 1024
+    pos_action_scale: [0.1, 0.1, 0.1]
+    rot_action_scale: [0.1, 0.1, 0.1]
+    force_action_scale: [1.0, 1.0, 1.0]
+    torque_action_scale: [1.0, 1.0, 1.0]
+
+    clamp_rot: True
+    clamp_rot_thresh: 1.0e-6
+
+    num_keypoints: 4  # number of keypoints used in reward
+    keypoint_scale: 0.5  # length of line of keypoints
+
+    keypoint_reward_scale: 1.0  # scale on keypoint-based reward
+    action_penalty_scale: 0.0  # scale on action penalty
+    
+    success_bonus: 0.0  # bonus if plug has been inserted in socket
 
 
 ctrl:

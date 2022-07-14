@@ -18,7 +18,7 @@ sim:
 env:
     numEnvs: 128
     numObservations: 33
-    numActions: 12
+    numActions: 13
 
 randomize:
     joint_noise: 0.0  # noise on Franka DOF positions [deg]
@@ -28,7 +28,7 @@ randomize:
     plug_noise_xy: 0.05  # if random, XY-axis noise on plug position during each reset
 
 rl:
-    max_episode_length: 1024
+    max_episode_length: 512
     pos_action_scale: [0.1, 0.1, 0.1]
     rot_action_scale: [0.1, 0.1, 0.1]
     force_action_scale: [1.0, 1.0, 1.0]
@@ -44,6 +44,7 @@ rl:
     action_penalty_scale: 0.0  # scale on action penalty
     add_obs_finger_force: False  # add observations of force on left and right fingers
 
+    far_error_thresh: 0.100  # threshold above which plug is considered too far from socket
     success_bonus: 0.0  # bonus if plug has been inserted in socket
 
 

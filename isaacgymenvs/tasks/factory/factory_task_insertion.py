@@ -163,7 +163,7 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
         self.actions = actions.clone().to(self.device)  # shape = (num_envs, num_actions); values = [-1, 1]
 
         self._apply_actions_as_ctrl_targets(actions=self.actions,
-                                            ctrl_target_gripper_dof_pos=0.0,
+                                            ctrl_target_gripper_dof_pos=self.actions[-1],
                                             do_scale=True)
 
 
@@ -219,6 +219,35 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
         """Get failure mask at current timestep."""
         # TODO
         curr_failures = torch.zeros((self.num_envs,), dtype=torch.bool, device=self.device)
+        
+        # If max episode length has been reached
+        self.is_expired = torch.where(self.progress_buf[:] >= self.cfg_task.rl.max_episode_length,
+                                      torch.ones_like(curr_failures),
+                                      curr_failures)
+
+        # If plug is too far from socket
+        self.is_far = torch.where(self.socket_dist_to_plug > self.cfg_task.rl.far_error_thresh,
+                                  torch.ones_like(curr_failures),
+                                  curr_failures)
+
+        # If plug has slipped (distance-based definition) # TODO plug height is not provided
+        # self.is_slipped = \
+        #     torch.where(
+        #         self.plug_dist_to_fingerpads > self.asset_info_franka_table.franka_fingerpad_length * 0.5 + self.nut_heights.squeeze(-1) * 0.5,
+        #         torch.ones_like(curr_failures),
+        #         curr_failures)
+        # self.is_slipped = torch.logical_and(self.is_slipped, torch.logical_not(curr_successes))  # ignore slip if successful
+
+        # If nut has fallen (i.e., if nut XY pos has drifted from center of bolt and nut Z pos has drifted below top of bolt)
+        # self.is_fallen = torch.logical_and(
+        #     torch.norm(self.nut_com_pos[:, 0:2], p=2, dim=-1) > self.bolt_widths.squeeze(-1) * 0.5,
+        #     self.nut_com_pos[:, 2] < self.cfg_base.env.table_height + self.bolt_head_heights.squeeze(
+        #         -1) + self.bolt_shank_lengths.squeeze(-1) + self.nut_heights.squeeze(-1) * 0.5)
+
+        curr_failures = torch.logical_or(curr_failures, self.is_expired)
+        curr_failures = torch.logical_or(curr_failures, self.is_far)
+        # curr_failures = torch.logical_or(curr_failures, self.is_slipped)
+        # curr_failures = torch.logical_or(curr_failures, self.is_fallen)
 
         return curr_failures
 
@@ -364,7 +393,8 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
             self.ctrl_target_fingertip_contact_wrench = torch.cat((force_actions, torque_actions), dim=-1)
 
-        self.ctrl_target_gripper_dof_pos = ctrl_target_gripper_dof_pos
+        if do_scale:
+            self.ctrl_target_gripper_dof_pos = ctrl_target_gripper_dof_pos * self.cfg_task.rl.gripper_action_scale
 
         self.generate_ctrl_signals()
 

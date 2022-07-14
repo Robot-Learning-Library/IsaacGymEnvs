@@ -42,7 +42,8 @@ rl:
 
     keypoint_reward_scale: 1.0  # scale on keypoint-based reward
     action_penalty_scale: 0.0  # scale on action penalty
-    
+    add_obs_finger_force: False  # add observations of force on left and right fingers
+
     success_bonus: 0.0  # bonus if plug has been inserted in socket
 
 

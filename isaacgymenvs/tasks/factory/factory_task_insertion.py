@@ -56,7 +56,6 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
         self.cfg = cfg
         self._get_task_yaml_params()
-
         self._acquire_task_tensors()
         self.parse_controller_spec()
 

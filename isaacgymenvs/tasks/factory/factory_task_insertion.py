@@ -198,8 +198,7 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
         if self.cfg_task.rl.add_obs_finger_force:
             obs_tensors += [self.left_finger_force, self.right_finger_force]
 
-        obs_tensors = torch.cat(obs_tensors, dim=-1)
-        self.obs_buf[:, :obs_tensors.shape[-1]] = obs_tensors  # shape = (num_envs, num_observations)
+        self.obs_buf = torch.cat(obs_tensors, dim=-1)
 
         return self.obs_buf  # shape = (num_envs, num_observations)
 

@@ -41,7 +41,6 @@ rl:
     rot_action_scale: [0.1, 0.1, 0.1]
     force_action_scale: [1.0, 1.0, 1.0]
     torque_action_scale: [1.0, 1.0, 1.0]
-    gripper_action_scale: [1.0]
 
     clamp_rot: True
     clamp_rot_thresh: 1.0e-6

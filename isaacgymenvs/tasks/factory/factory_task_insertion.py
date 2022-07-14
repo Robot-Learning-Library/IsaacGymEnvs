@@ -207,7 +207,7 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
         curr_successes = torch.zeros((self.num_envs,), dtype=torch.bool, device=self.device)
 
         # If nut is close enough to target pos
-        is_close = torch.where(self.socket_dist_to_plug < self.thread_pitches.squeeze(-1) * 4,
+        is_close = torch.where(self.socket_dist_to_plug < torch.ones_like(self.socket_dist_to_plug) * 0.005,
                                torch.ones_like(curr_successes),
                                torch.zeros_like(curr_successes))
 

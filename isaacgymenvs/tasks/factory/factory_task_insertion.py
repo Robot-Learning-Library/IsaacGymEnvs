@@ -163,7 +163,7 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
         self.actions = actions.clone().to(self.device)  # shape = (num_envs, num_actions); values = [-1, 1]
 
         self._apply_actions_as_ctrl_targets(actions=self.actions,
-                                            ctrl_target_gripper_dof_pos=self.actions[-1],
+                                            ctrl_target_gripper_dof_pos=self.actions[:, -1],
                                             do_scale=True)
 
 

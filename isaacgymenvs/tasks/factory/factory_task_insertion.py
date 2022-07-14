@@ -393,8 +393,9 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
             self.ctrl_target_fingertip_contact_wrench = torch.cat((force_actions, torque_actions), dim=-1)
 
+        self.ctrl_target_gripper_dof_pos = ctrl_target_gripper_dof_pos.unsqueeze(-1).repeat(1,2) # gripper action is symmetric for two pads: (a,a)
         if do_scale:
-            self.ctrl_target_gripper_dof_pos = ctrl_target_gripper_dof_pos * torch.tensor(self.cfg_task.rl.gripper_action_scale, device=self.device)
+            self.ctrl_target_gripper_dof_pos = (self.ctrl_target_gripper_dof_pos + 1.) * 0.5  # range [0,1]
 
         self.generate_ctrl_signals()
 

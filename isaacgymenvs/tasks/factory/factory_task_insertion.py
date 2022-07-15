@@ -97,6 +97,7 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
                                                                  offset=self.asset_info_franka_table.franka_finger_length - self.asset_info_franka_table.franka_fingerpad_length * 0.5,
                                                                  device=self.device)
         self.finger_plug_keypoint_dist = self._get_keypoint_dist(body='finger_plug')
+
         # self.plug_keypoint_dist = self._get_keypoint_dist(body='plug')
 
         self.plug_dist_to_fingerpads = torch.norm(self.fingerpad_midpoint_pos - self.plug_pos, p=2,
@@ -162,15 +163,33 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
         self.actions = actions.clone().to(self.device)  # shape = (num_envs, num_actions); values = [-1, 1]
 
-        self._apply_actions_as_ctrl_targets(actions=self.actions,
-                                            ctrl_target_gripper_dof_pos=self.actions[:, -1],
-                                            do_scale=True)
+        # if control the gripper with action
+        # self._apply_actions_as_ctrl_targets(actions=self.actions,
+        #                                     ctrl_target_gripper_dof_pos=self.actions[:, -1],
+        #                                     do_scale=True)
 
+        less_than_half_step = (self.progress_buf[0] < int(self.max_episode_length - 1)/2)
+        if less_than_half_step: # keep the gripper opening
+            self._apply_actions_as_ctrl_targets(actions=self.actions,
+                                                ctrl_target_gripper_dof_pos=self.asset_info_franka_table.franka_gripper_width_max,
+                                                do_scale=True)
+        else:  # keep the gripper close
+            self._apply_actions_as_ctrl_targets(actions=self.actions,
+                                    ctrl_target_gripper_dof_pos=0.,
+                                    do_scale=True)
 
     def post_physics_step(self):
         """Step buffers. Refresh tensors. Compute observations and reward."""
 
         self.progress_buf[:] += 1
+
+        is_half_step = (self.progress_buf[0] == int(self.max_episode_length - 1)/2)
+
+        if self.cfg_task.env.close_and_lift:
+            # At this point, robot has executed RL policy. Now close gripper and lift (open-loop)
+            if is_half_step:
+                self._close_gripper(sim_steps=self.cfg_task.env.num_gripper_close_sim_steps)
+                self._lift_gripper(sim_steps=self.cfg_task.env.num_gripper_lift_sim_steps)
 
         self.refresh_base_tensors()
         self.refresh_env_tensors()
@@ -262,18 +281,27 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
     def _update_rew_buf(self, curr_successes):
         """Compute reward at current timestep."""
-        keypoint_reward = -(self.finger_plug_keypoint_dist)
+        keypoint_reward = -(self.finger_plug_keypoint_dist + self.socket_dist_to_plug)
         action_penalty = torch.norm(self.actions, p=2, dim=-1)
 
         self.rew_buf[:] = keypoint_reward * self.cfg_task.rl.keypoint_reward_scale \
                           - action_penalty * self.cfg_task.rl.action_penalty_scale \
                           + curr_successes * self.cfg_task.rl.success_bonus
-        
+
+        # In this policy, episode length is constant across all envs
+        is_half_step = (self.progress_buf[0] == int(self.max_episode_length - 1)/2)
+
+        if is_half_step:        
+            # Check if nut is picked up and above table
+            lift_success = self._check_lift_success()
+            self.rew_buf[:] += lift_success * self.cfg_task.rl.success_bonus
+            self.extras['successes'] = torch.mean(lift_success.float())
+
         # In this policy, episode length is constant across all envs
         is_last_step = (self.progress_buf[0] == self.max_episode_length - 1)
 
         if is_last_step:
-            self.extras['successes'] = torch.mean(curr_successes.float())
+            self.extras['successes'] += torch.mean(curr_successes.float())
 
     def _update_reset_buf(self, curr_failures):
         """Assign environments for reset if successful or failed."""
@@ -393,13 +421,55 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
             self.ctrl_target_fingertip_contact_wrench = torch.cat((force_actions, torque_actions), dim=-1)
 
-        self.ctrl_target_gripper_dof_pos = ctrl_target_gripper_dof_pos.unsqueeze(-1).repeat(1,2) # gripper action is symmetric for two pads: (a,a)
-        if do_scale:
-            self.ctrl_target_gripper_dof_pos = (self.ctrl_target_gripper_dof_pos + 1.) * 0.5  # range [0,1]
+        # if control the gripper with action as well
+        # self.ctrl_target_gripper_dof_pos = ctrl_target_gripper_dof_pos.unsqueeze(-1).repeat(1,2) # gripper action is symmetric for two pads: (a,a)
+        # if do_scale:
+        #     self.ctrl_target_gripper_dof_pos = (self.ctrl_target_gripper_dof_pos + 1.) * 0.5  # range [0,1]
+        
+        self.ctrl_target_gripper_dof_pos = ctrl_target_gripper_dof_pos
 
         self.generate_ctrl_signals()
+
+    def _check_lift_success(self, height_thresh=0.01):
+        """Check if nut is above table by more than specified multiple times height of nut."""
+
+        lift_success = torch.where(
+            self.plug_pos[:, 2] > self.cfg_base.env.table_height + height_thresh,
+            torch.ones((self.num_envs,), device=self.device),
+            torch.zeros((self.num_envs,), device=self.device))
+
+        return lift_success
 
     def _open_gripper(self, sim_steps=20):
         """Fully open gripper using controller. Called outside RL loop (i.e., after last step of episode)."""
 
         self._move_gripper_to_dof_pos(gripper_dof_pos=0.1, sim_steps=sim_steps)
+
+    def _close_gripper(self, sim_steps=20):
+        """Fully close gripper using controller. Called outside RL loop (i.e., after last step of episode)."""
+
+        self._move_gripper_to_dof_pos(gripper_dof_pos=0.0, sim_steps=sim_steps)
+
+    def _move_gripper_to_dof_pos(self, gripper_dof_pos, sim_steps=20):
+        """Move gripper fingers to specified DOF position using controller."""
+
+        delta_hand_pose = torch.zeros((self.num_envs, self.cfg_task.env.numActions),
+                                      device=self.device)  # No hand motion
+        self._apply_actions_as_ctrl_targets(delta_hand_pose, gripper_dof_pos, do_scale=False)
+
+        # Step sim
+        for _ in range(sim_steps):
+            self.render()
+            self.gym.simulate(self.sim)
+
+    def _lift_gripper(self, franka_gripper_width=0.0, lift_distance=0.3, sim_steps=20):
+        """Lift gripper by specified distance. Called outside RL loop (i.e., after last step of episode)."""
+
+        delta_hand_pose = torch.zeros([self.num_envs, 6], device=self.device)
+        delta_hand_pose[:, 2] = lift_distance
+
+        # Step sim
+        for _ in range(sim_steps):
+            self._apply_actions_as_ctrl_targets(delta_hand_pose, franka_gripper_width, do_scale=False)
+            self.render()
+            self.gym.simulate(self.sim)

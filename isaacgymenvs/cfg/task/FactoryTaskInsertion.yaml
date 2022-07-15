@@ -18,7 +18,7 @@ sim:
 env:
     numEnvs: 128
     numObservations: 33
-    numActions: 13
+    numActions: 12
 
 randomize:
     joint_noise: 0.0  # noise on Franka DOF positions [deg]
@@ -46,7 +46,7 @@ rl:
     add_obs_finger_force: False  # add observations of force on left and right fingers
 
     far_error_thresh: 0.100  # threshold above which plug is considered too far from socket
-    success_bonus: 0.0  # bonus if plug has been inserted in socket
+    success_bonus: 1.0  # bonus if plug has been inserted in socket
 
 
 ctrl:

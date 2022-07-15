@@ -20,6 +20,12 @@ env:
     numObservations: 33
     numActions: 12
 
+    close_and_lift: True  # close gripper and lift after last step of episode
+    num_gripper_move_sim_steps: 20  # number of timesteps to reserve for moving gripper before first step of episode
+    num_gripper_close_sim_steps: 25  # number of timesteps to reserve for closing gripper after last step of episode
+    num_gripper_lift_sim_steps: 25  # number of timesteps to reserve for lift after last step of episode
+
+
 randomize:
     joint_noise: 0.0  # noise on Franka DOF positions [deg]
     initial_state: random  # initialize plugs in random state or goal state {random, goal}

@@ -184,8 +184,7 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
         self.progress_buf[:] += 1
 
-        is_half_step = (self.progress_buf[0] == int(self.max_episode_length - 1)/2)
-
+        is_half_step = (self.progress_buf[0] == int((self.max_episode_length - 1)/2))
         if self.cfg_task.env.close_and_lift:
             # At this point, robot has executed RL policy. Now close gripper and lift (open-loop)
             if is_half_step:
@@ -290,7 +289,7 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
                           + curr_successes * self.cfg_task.rl.success_bonus
 
         # In this policy, episode length is constant across all envs
-        is_half_step = (self.progress_buf[0] == int(self.max_episode_length - 1)/2)
+        is_half_step = (self.progress_buf[0] == int((self.max_episode_length - 1)/2))
 
         if is_half_step:        
             # Check if nut is picked up and above table

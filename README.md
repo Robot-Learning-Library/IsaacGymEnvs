@@ -109,6 +109,10 @@ you will need to escape them and put quotes around the string. For example,
 ```
 python train.py task=FactoryTaskNutBoltScrew headless=False num_envs=2 test=True task.env.numEnvs=2 checkpoint='runs/FactoryTaskNutBoltScrew/nn/last_FactoryTaskNutBoltScrewep10240rew.pth'
 ```
+Actuall just use:
+```
+python train.py task=FactoryTaskInsertion headless=False test=True checkpoint='runs/FactoryTaskInsertion/nn/20220803152555/FactoryTaskInsertion.pth'
+```
 
 ### Configuration and command line arguments
 

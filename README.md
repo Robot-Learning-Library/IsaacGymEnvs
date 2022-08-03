@@ -107,7 +107,7 @@ you will need to escape them and put quotes around the string. For example,
 `checkpoint="./runs/Ant/nn/last_Antep\=501rew\[5981.31\].pth"`
 
 ```
-python train.py task=FactoryTaskNutBoltScrew headless=False num_envs=2 test=True task.env.numEnvs=2 checkpoint=runs/FactoryTaskNutBoltScrew/nn/last_FactoryTaskNutBoltScrewep10240rew.pth 
+python train.py task=FactoryTaskNutBoltScrew headless=False num_envs=2 test=True task.env.numEnvs=2 checkpoint='runs/FactoryTaskNutBoltScrew/nn/last_FactoryTaskNutBoltScrewep10240rew.pth'
 ```
 
 ### Configuration and command line arguments

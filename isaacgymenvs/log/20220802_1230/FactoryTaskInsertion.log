@@ -1,0 +1,379 @@
+
+train.py:49: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name="config", config_path="./cfg")
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/hydra/_internal/defaults_list.py:251: UserWarning: In 'config': Defaults list is missing `_self_`. See https://hydra.cc/docs/upgrades/1.0_to_1.1/default_composition_order for more information
+  warnings.warn(msg, UserWarning)
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/hydra/_internal/defaults_list.py:415: UserWarning: In config: Invalid overriding of hydra/job_logging:
+Default list overrides requires 'override' keyword.
+See https://hydra.cc/docs/next/upgrades/1.0_to_1.1/defaults_list_override for more information.
+
+  deprecation_warning(msg)
+Importing module 'gym_37' (/home/zihan/software/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_37.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/zihan/software/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.12.0+cu102
+Device count 2
+/home/zihan/software/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Using /home/zihan/.cache/torch_extensions/py37_cu102 as PyTorch extensions root...
+Emitting ninja build file /home/zihan/.cache/torch_extensions/py37_cu102/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/hydra/_internal/hydra.py:127: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/next/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  configure_logging=with_log_configuration,
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/ray/autoscaler/_private/cli_logger.py:61: FutureWarning: Not all Ray CLI dependencies were found. In Ray 1.4+, the Ray CLI, autoscaler, and dashboard will only be usable via `pip install 'ray[default]'`. Please update your install command.
+  "update your install command.", FutureWarning)
+ninja: no work to do.
+2022-08-02 12:30:12,353 - INFO - logger - logger initialized
+wandb: Currently logged in as: quantumiracle. Use `wandb login --relogin` to force relogin
+Loading extension module gymtorch...
+Error: FBX library failed to load - importing FBX data will not succeed. Message: No module named 'fbx'
+FBX tools must be installed from https://help.autodesk.com/view/FBX/2020/ENU/?guid=FBX_Developer_Help_scripting_with_python_fbx_installing_python_fbx_html
+task: 
+    name: FactoryTaskInsertion
+    physics_engine: physx
+    sim: 
+        use_gpu_pipeline: True
+        up_axis: z
+        dt: 0.016667
+        gravity: [0.0, 0.0, -9.81]
+        disable_gravity: False
+    env: 
+        numEnvs: 128
+        numObservations: 33
+        numActions: 12
+        close_and_lift: True
+        num_gripper_move_sim_steps: 20
+        num_gripper_close_sim_steps: 25
+        num_gripper_lift_sim_steps: 25
+    randomize: 
+        joint_noise: 0.0
+        initial_state: random
+        plug_bias_y: -0.1
+        plug_bias_z: 0.0
+        plug_noise_xy: 0.05
+    rl: 
+        max_episode_length: 512
+        pos_action_scale: [0.1, 0.1, 0.1]
+        rot_action_scale: [0.1, 0.1, 0.1]
+        force_action_scale: [1.0, 1.0, 1.0]
+        torque_action_scale: [1.0, 1.0, 1.0]
+        gripper_action_scale: [1.0]
+        clamp_rot: True
+        clamp_rot_thresh: 1e-06
+        num_keypoints: 4
+        keypoint_scale: 0.5
+        keypoint_reward_scale: 1.0
+        action_penalty_scale: 0.0
+        add_obs_finger_force: False
+        far_error_thresh: 0.4
+        success_bonus: 1.0
+    ctrl: 
+        ctrl_type: joint_space_id
+        all: 
+            jacobian_type: geometric
+            gripper_prop_gains: [50, 50]
+            gripper_deriv_gains: [2, 2]
+        gym_default: 
+            ik_method: dls
+            joint_prop_gains: [40, 40, 40, 40, 40, 40, 40]
+            joint_deriv_gains: [8, 8, 8, 8, 8, 8, 8]
+            gripper_prop_gains: [500, 500]
+            gripper_deriv_gains: [20, 20]
+        joint_space_ik: 
+            ik_method: dls
+            joint_prop_gains: [1, 1, 1, 1, 1, 1, 1]
+            joint_deriv_gains: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+        joint_space_id: 
+            ik_method: dls
+            joint_prop_gains: [40, 40, 40, 40, 40, 40, 40]
+            joint_deriv_gains: [8, 8, 8, 8, 8, 8, 8]
+        task_space_impedance: 
+            motion_ctrl_axes: [1, 1, 1, 1, 1, 1]
+            task_prop_gains: [40, 40, 40, 40, 40, 40]
+            task_deriv_gains: [8, 8, 8, 8, 8, 8]
+        operational_space_motion: 
+            motion_ctrl_axes: [1, 1, 1, 1, 1, 1]
+            task_prop_gains: [1, 1, 1, 1, 1, 1]
+            task_deriv_gains: [1, 1, 1, 1, 1, 1]
+        open_loop_force: 
+            force_ctrl_axes: [0, 0, 1, 0, 0, 0]
+        closed_loop_force: 
+            force_ctrl_axes: [0, 0, 1, 0, 0, 0]
+            wrench_prop_gains: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+        hybrid_force_motion: 
+            motion_ctrl_axes: [1, 1, 0, 1, 1, 1]
+            task_prop_gains: [40, 40, 40, 40, 40, 40]
+            task_deriv_gains: [8, 8, 8, 8, 8, 8]
+            force_ctrl_axes: [0, 0, 1, 0, 0, 0]
+            wrench_prop_gains: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+train: 
+    params: 
+        seed: 42
+        algo: 
+            name: a2c_continuous
+        model: 
+            name: continuous_a2c_logstd
+        network: 
+            name: actor_critic
+            separate: False
+            space: 
+                continuous: 
+                    mu_activation: None
+                    sigma_activation: None
+                    mu_init: 
+                        name: default
+                    sigma_init: 
+                        name: const_initializer
+                        val: 0
+                    fixed_sigma: True
+            mlp: 
+                units: [256, 128, 64]
+                activation: elu
+                d2rl: False
+                initializer: 
+                    name: default
+                regularizer: 
+                    name: None
+        load_checkpoint: False
+        load_path: 
+        config: 
+            name: FactoryTaskInsertion
+            full_experiment_name: FactoryTaskInsertion
+            env_name: rlgpu
+            multi_gpu: False
+            ppo: True
+            mixed_precision: True
+            normalize_input: True
+            normalize_value: True
+            value_bootstrap: True
+            num_actors: 128
+            reward_shaper: 
+                scale_value: 1.0
+            normalize_advantage: True
+            gamma: 0.99
+            tau: 0.95
+            learning_rate: 0.0001
+            lr_schedule: fixed
+            schedule_type: standard
+            kl_threshold: 0.016
+            score_to_win: 20000
+            max_epochs: 8192
+            save_best_after: 50
+            save_frequency: 100
+            print_stats: True
+            grad_norm: 1.0
+            entropy_coef: 0.0
+            truncate_grads: False
+            e_clip: 0.2
+            horizon_length: 32
+            minibatch_size: 512
+            mini_epochs: 8
+            critic_coef: 2
+            clip_value: True
+            seq_len: 4
+            bounds_loss_coef: 0.0001
+task_name: FactoryTaskInsertion
+experiment: 
+num_envs: 
+seed: 42
+torch_deterministic: False
+max_iterations: 
+physics_engine: physx
+pipeline: gpu
+sim_device: cuda:0
+rl_device: cuda:0
+graphics_device_id: 0
+num_threads: 4
+solver_type: 1
+num_subscenes: 4
+test: False
+checkpoint: 
+multi_gpu: False
+wandb_activate: True
+wandb_group: 
+wandb_name: FactoryTaskInsertion
+wandb_entity: quantumiracle
+wandb_project: isaacgymenvs
+capture_video: False
+capture_video_freq: 1464
+capture_video_len: 100
+force_render: True
+headless: True
+Setting seed: 42
+wandb: wandb version 0.12.21 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.12.18
+wandb: Run data is saved locally in /home/zihan/research/IsaacGymEnvs/isaacgymenvs/wandb/run-20220802_123014-qq7j3jzb
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run FactoryTaskInsertion_2022-08-02_12-30-12
+wandb: ⭐️ View project at https://wandb.ai/quantumiracle/isaacgymenvs
+wandb: 🚀 View run at https://wandb.ai/quantumiracle/isaacgymenvs/runs/qq7j3jzb
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Using SDF cache directory '/home/zihan/.isaacgym/sdf_V100'
+~!~!~! Loaded/Cooked SDF triangle mesh 0 @ 0x561be4987570, resolution=256, spacing=0.000195
+  ~!~! Bounds:  (-0.001994, 0.001994) (-0.001994, 0.001994) (0.000000, 0.050000)
+  ~!~! Extents: (0.003988, 0.003988, 0.050000)
+  ~!~! Resolution: (21, 21, 256)
+~!~!~! Loaded/Cooked SDF triangle mesh 1 @ 0x561be49878a0, resolution=256, spacing=0.000098
+  ~!~! Bounds:  (-0.012500, 0.012500) (-0.012500, 0.012500) (0.000000, 0.008992)
+  ~!~! Extents: (0.025000, 0.025000, 0.008992)
+  ~!~! Resolution: (256, 256, 93)
+~!~!~! Loaded/Cooked SDF triangle mesh 2 @ 0x561be635e5a0, resolution=256, spacing=0.000195
+  ~!~! Bounds:  (-0.003993, 0.003993) (-0.003993, 0.003993) (0.000000, 0.050000)
+  ~!~! Extents: (0.007986, 0.007986, 0.050000)
+  ~!~! Resolution: (41, 41, 256)
+~!~!~! Loaded/Cooked SDF triangle mesh 3 @ 0x561be81abd60, resolution=256, spacing=0.000098
+  ~!~! Bounds:  (-0.012500, 0.012500) (-0.012500, 0.012500) (0.000000, 0.008992)
+  ~!~! Extents: (0.025000, 0.025000, 0.008992)
+  ~!~! Resolution: (256, 256, 93)
+~!~!~! Loaded/Cooked SDF triangle mesh 4 @ 0x561be8616d90, resolution=256, spacing=0.000195
+  ~!~! Bounds:  (-0.005991, 0.005991) (-0.005991, 0.005991) (-0.000000, 0.050000)
+  ~!~! Extents: (0.011983, 0.011983, 0.050000)
+  ~!~! Resolution: (62, 62, 256)
+~!~!~! Loaded/Cooked SDF triangle mesh 5 @ 0x561be87baed0, resolution=256, spacing=0.000098
+  ~!~! Bounds:  (-0.012500, 0.012500) (-0.012500, 0.012500) (0.000000, 0.008992)
+  ~!~! Extents: (0.025000, 0.025000, 0.008992)
+  ~!~! Resolution: (256, 256, 93)
+~!~!~! Loaded/Cooked SDF triangle mesh 6 @ 0x561be91a5c40, resolution=256, spacing=0.000195
+  ~!~! Bounds:  (-0.007992, 0.007992) (-0.007992, 0.007992) (-0.000000, 0.050000)
+  ~!~! Extents: (0.015983, 0.015983, 0.050000)
+  ~!~! Resolution: (82, 82, 256)
+~!~!~! Loaded/Cooked SDF triangle mesh 7 @ 0x561be84ea1f0, resolution=256, spacing=0.000098
+  ~!~! Bounds:  (-0.012500, 0.012500) (-0.012500, 0.012500) (0.000000, 0.008992)
+  ~!~! Extents: (0.025000, 0.025000, 0.008992)
+  ~!~! Resolution: (256, 256, 93)
+~!~!~! Loaded/Cooked SDF triangle mesh 8 @ 0x561be83fdcb0, resolution=256, spacing=0.000195
+  ~!~! Bounds:  (-0.001985, 0.001985) (-0.001985, 0.001985) (0.000000, 0.050000)
+  ~!~! Extents: (0.003970, 0.003970, 0.050000)
+  ~!~! Resolution: (21, 21, 256)
+~!~!~! Loaded/Cooked SDF triangle mesh 9 @ 0x561be84c2490, resolution=256, spacing=0.000098
+  ~!~! Bounds:  (-0.012500, 0.012500) (-0.012500, 0.012500) (0.000000, 0.008992)
+  ~!~! Extents: (0.025000, 0.025000, 0.008992)
+  ~!~! Resolution: (256, 256, 93)
+~!~!~! Loaded/Cooked SDF triangle mesh 10 @ 0x561be881d1d0, resolution=256, spacing=0.000195
+  ~!~! Bounds:  (-0.003982, 0.003982) (-0.003455, 0.003455) (0.000000, 0.050000)
+  ~!~! Extents: (0.007964, 0.006910, 0.050000)
+  ~!~! Resolution: (41, 36, 256)
+~!~!~! Loaded/Cooked SDF triangle mesh 11 @ 0x561be81b31f0, resolution=256, spacing=0.000098
+  ~!~! Bounds:  (-0.012500, 0.012500) (-0.012500, 0.012500) (0.000000, 0.008992)
+  ~!~! Extents: (0.025000, 0.025000, 0.008992)
+  ~!~! Resolution: (256, 256, 93)
+~!~!~! Loaded/Cooked SDF triangle mesh 12 @ 0x561be972afb0, resolution=256, spacing=0.000195
+  ~!~! Bounds:  (-0.005979, 0.005979) (-0.003955, 0.003955) (0.000000, 0.050000)
+  ~!~! Extents: (0.011958, 0.007910, 0.050000)
+  ~!~! Resolution: (62, 41, 256)
+~!~!~! Loaded/Cooked SDF triangle mesh 13 @ 0x561be861c0f0, resolution=256, spacing=0.000098
+  ~!~! Bounds:  (-0.012500, 0.012500) (-0.012500, 0.012500) (0.000000, 0.008992)
+  ~!~! Extents: (0.025000, 0.025000, 0.008992)
+  ~!~! Resolution: (256, 256, 93)
+~!~!~! Loaded/Cooked SDF triangle mesh 14 @ 0x561be972dbb0, resolution=256, spacing=0.000195
+  ~!~! Bounds:  (-0.007978, 0.007978) (-0.004955, 0.004955) (0.000000, 0.050000)
+  ~!~! Extents: (0.015956, 0.009910, 0.050000)
+  ~!~! Resolution: (82, 51, 256)
+~!~!~! Loaded/Cooked SDF triangle mesh 15 @ 0x561bea717b30, resolution=256, spacing=0.000098
+  ~!~! Bounds:  (-0.012500, 0.012500) (-0.012500, 0.012500) (0.000000, 0.008992)
+  ~!~! Extents: (0.025000, 0.025000, 0.008992)
+  ~!~! Resolution: (256, 256, 93)
+self.seed = 42
+Started to train
+Exact experiment name requested from command line: FactoryTaskInsertion
+Box(-1.0, 1.0, (12,), float32) Box(-inf, inf, (33,), float32)
+current training device: cuda:0
+build mlp: 33
+RunningMeanStd:  (1,)
+RunningMeanStd:  (33,)
+fps step: 6851 fps step and policy inference: 4531 fps total: 2027 epoch: 1/8192
+fps step: 10598 fps step and policy inference: 9322 fps total: 2658 epoch: 2/8192
+fps step: 10405 fps step and policy inference: 9147 fps total: 2623 epoch: 3/8192
+fps step: 10386 fps step and policy inference: 9182 fps total: 2658 epoch: 4/8192
+fps step: 10296 fps step and policy inference: 9072 fps total: 2634 epoch: 5/8192
+fps step: 9583 fps step and policy inference: 8526 fps total: 2577 epoch: 6/8192
+fps step: 9352 fps step and policy inference: 8328 fps total: 2574 epoch: 7/8192
+fps step: 9309 fps step and policy inference: 8322 fps total: 2548 epoch: 8/8192
+fps step: 9661 fps step and policy inference: 8600 fps total: 2679 epoch: 9/8192
+fps step: 9088 fps step and policy inference: 8157 fps total: 2838 epoch: 10/8192
+fps step: 8908 fps step and policy inference: 7992 fps total: 2818 epoch: 11/8192
+fps step: 8388 fps step and policy inference: 7561 fps total: 2749 epoch: 12/8192
+fps step: 8374 fps step and policy inference: 7539 fps total: 2765 epoch: 13/8192
+fps step: 8962 fps step and policy inference: 8044 fps total: 2824 epoch: 14/8192
+fps step: 7899 fps step and policy inference: 7167 fps total: 2705 epoch: 15/8192
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/gym/spaces/box.py:78: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+Error executing job with overrides: ['task=FactoryTaskInsertion', 'headless=True', 'wandb_activate=True', 'wandb_entity=quantumiracle']
+Traceback (most recent call last):
+  File "train.py", line 181, in launch_rlg_hydra
+    'sigma' : None
+  File "/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/rl_games/torch_runner.py", line 120, in run
+    self.run_train(args)
+  File "/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/rl_games/torch_runner.py", line 101, in run_train
+    agent.train()
+  File "/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/rl_games/common/a2c_common.py", line 1173, in train
+    step_time, play_time, update_time, sum_time, a_losses, c_losses, b_losses, entropies, kls, last_lr, lr_mul = self.train_epoch()
+  File "/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/rl_games/common/a2c_common.py", line 1037, in train_epoch
+    batch_dict = self.play_steps()
+  File "/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/rl_games/common/a2c_common.py", line 636, in play_steps
+    self.obs, rewards, self.dones, infos = self.env_step(res_dict['actions'])
+  File "/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/rl_games/common/a2c_common.py", line 458, in env_step
+    obs, rewards, dones, infos = self.vec_env.step(actions)
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/utils/rlgames_utils.py", line 156, in step
+    return  self.env.step(actions)
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/base/vec_task.py", line 341, in step
+    self.post_physics_step()
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/factory/factory_task_insertion.py", line 198, in post_physics_step
+    self.compute_reward()
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/factory/factory_task_insertion.py", line 279, in compute_reward
+    self._update_rew_buf(curr_successes)
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/factory/factory_task_insertion.py", line 307, in _update_rew_buf
+    self.extras['successes'] += torch.mean(curr_successes.float())
+KeyError: 'successes'
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: - 0.005 MB of 0.005 MB uploaded (0.000 MB deduped)wandb: \ 0.005 MB of 0.005 MB uploaded (0.000 MB deduped)wandb: | 0.005 MB of 0.005 MB uploaded (0.000 MB deduped)wandb: / 0.005 MB of 0.005 MB uploaded (0.000 MB deduped)wandb: - 0.001 MB of 0.038 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.038 MB uploaded (0.000 MB deduped)wandb: | 0.038 MB of 0.038 MB uploaded (0.000 MB deduped)wandb: / 0.038 MB of 0.038 MB uploaded (0.000 MB deduped)wandb: - 0.038 MB of 0.038 MB uploaded (0.000 MB deduped)wandb: \ 0.038 MB of 0.038 MB uploaded (0.000 MB deduped)wandb: | 0.038 MB of 0.038 MB uploaded (0.000 MB deduped)wandb: / 0.038 MB of 0.038 MB uploaded (0.000 MB deduped)wandb: - 0.038 MB of 0.038 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:                              global_step ▁▁▂▃▃▃▄▅▅▅▆▇▇▇█
+wandb:                              info/e_clip ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                              info/epochs ▁▁▂▃▃▃▄▅▅▅▆▇▇▇█
+wandb:                                  info/kl █▁▁▂▁▂▂▂▃▂▁▁▂▁▂
+wandb:                             info/last_lr ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                              info/lr_mul ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                            losses/a_loss █▅▄▃▃▂▂▃▃▃▂▃▂▂▁
+wandb:                       losses/bounds_loss ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                            losses/c_loss █▇▅▄▃▃▂▂▂▁▁▁▁▁▁
+wandb:                           losses/entropy ▃▄▅▆███▇▆▄▃▃▂▁▁
+wandb:               performance/rl_update_time █▇█▇▇█▇█▅▁▁▁▁▁▁
+wandb:                     performance/step_fps ▁███▇▆▆▆▆▅▅▄▄▅▃
+wandb:           performance/step_inference_fps ▁████▇▇▇▇▆▆▅▅▆▅
+wandb: performance/step_inference_rl_update_fps ▁▆▆▆▆▆▆▅▇██▇▇█▇
+wandb:          performance/step_inference_time █▁▁▁▁▂▂▂▂▂▂▃▃▂▃
+wandb:                    performance/step_time █▁▁▁▁▂▃▃▂▃▃▄▄▃▅
+wandb: 
+wandb: Run summary:
+wandb:                              global_step 57344
+wandb:                              info/e_clip 0.2
+wandb:                              info/epochs 15.0
+wandb:                                  info/kl 0.00057
+wandb:                             info/last_lr 0.0001
+wandb:                              info/lr_mul 1.0
+wandb:                            losses/a_loss -0.01614
+wandb:                       losses/bounds_loss 0.0
+wandb:                            losses/c_loss 0.02661
+wandb:                           losses/entropy 17.01507
+wandb:               performance/rl_update_time 0.9426
+wandb:                     performance/step_fps 7899.03027
+wandb:           performance/step_inference_fps 7166.73242
+wandb: performance/step_inference_rl_update_fps 2705.1814
+wandb:          performance/step_inference_time 0.57153
+wandb:                    performance/step_time 0.51854
+wandb: 
+wandb: Synced FactoryTaskInsertion_2022-08-02_12-30-12: https://wandb.ai/quantumiracle/isaacgymenvs/runs/qq7j3jzb
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 1 other file(s)
+wandb: Find logs at: ./wandb/run-20220802_123014-qq7j3jzb/logs

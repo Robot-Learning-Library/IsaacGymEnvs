@@ -97,13 +97,19 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
                                                                  quat=self.hand_quat,
                                                                  offset=self.asset_info_franka_table.franka_finger_length - self.asset_info_franka_table.franka_fingerpad_length * 0.5,
                                                                  device=self.device)
-        self.finger_plug_keypoint_dist = self._get_keypoint_dist(body='finger_plug')
+        # self.finger_plug_keypoint_dist = self._get_keypoint_dist(body='finger_plug')
 
         # self.plug_keypoint_dist = self._get_keypoint_dist(body='plug')
+        self.plug_com_pos = fc.translate_along_local_z(pos=self.plug_pos,
+                                                      quat=self.plug_quat,
+                                                    #   offset=self.bolt_head_heights + self.nut_heights * 0.5,
+                                                      offset = 0.002,  # needs more accurate value here
+                                                      device=self.device)
 
-        self.plug_dist_to_fingerpads = torch.norm(self.fingerpad_midpoint_pos - self.plug_pos, p=2,
+        self.plug_dist_to_fingerpads = torch.norm(self.fingertip_midpoint_pos - self.plug_com_pos, p=2,
                                                  dim=-1)  # distance between plug and midpoint between centers of fingerpads
-        self.socket_dist_to_plug = torch.norm(self.plug_pos - self.socket_pos, p=2,
+        self.finger_plug_keypoint_dist = self.plug_dist_to_fingerpads
+        self.socket_dist_to_plug = torch.norm(self.plug_com_pos - self.socket_pos, p=2,
                                                  dim=-1)  # distance between socket and plug between centers of fingerpads
 
     def _get_keypoint_dist(self, body):
@@ -169,12 +175,13 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
         #                                     ctrl_target_gripper_dof_pos=self.actions[:, -1],
         #                                     do_scale=True)
 
-        less_than_half_step = (self.progress_buf[0] < int(self.max_episode_length - 1)/2)
+        less_than_half_step = (self.progress_buf[0] < int((self.max_episode_length - 1)/2))
         if less_than_half_step: # keep the gripper opening
             self._apply_actions_as_ctrl_targets(actions=self.actions,
                                                 ctrl_target_gripper_dof_pos=self.asset_info_franka_table.franka_gripper_width_max,
                                                 do_scale=True)
         else:  # keep the gripper close
+            self.actions = torch.zeros_like(self.actions).to(self.device)   # keep static
             self._apply_actions_as_ctrl_targets(actions=self.actions,
                                     ctrl_target_gripper_dof_pos=0.,
                                     do_scale=True)
@@ -183,13 +190,14 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
         """Step buffers. Refresh tensors. Compute observations and reward."""
 
         self.progress_buf[:] += 1
-
+        is_last_step = (self.progress_buf[0] == self.max_episode_length - 1)
         is_half_step = (self.progress_buf[0] == int((self.max_episode_length - 1)/2))
         if self.cfg_task.env.close_and_lift:
             # At this point, robot has executed RL policy. Now close gripper and lift (open-loop)
             if is_half_step:
                 self._close_gripper(sim_steps=self.cfg_task.env.num_gripper_close_sim_steps)
                 self._lift_gripper(sim_steps=self.cfg_task.env.num_gripper_lift_sim_steps)
+
 
         self.refresh_base_tensors()
         self.refresh_env_tensors()
@@ -281,7 +289,9 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
     def _update_rew_buf(self, curr_successes):
         """Compute reward at current timestep."""
-        keypoint_reward = -(self.finger_plug_keypoint_dist + self.socket_dist_to_plug)
+        # keypoint_reward = -(self.finger_plug_keypoint_dist + self.socket_dist_to_plug)
+        keypoint_reward = -(self.finger_plug_keypoint_dist)
+
         action_penalty = torch.norm(self.actions, p=2, dim=-1)
 
         self.rew_buf[:] = keypoint_reward * self.cfg_task.rl.keypoint_reward_scale \
@@ -289,19 +299,22 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
                           + curr_successes * self.cfg_task.rl.success_bonus
 
         # In this policy, episode length is constant across all envs
-        is_half_step = (self.progress_buf[0] == int((self.max_episode_length - 1)/2))
-
-        if is_half_step:        
-            # Check if nut is picked up and above table
-            lift_success = self._check_lift_success()
-            self.rew_buf[:] += lift_success * self.cfg_task.rl.success_bonus
-            self.extras['successes'] = torch.mean(lift_success.float())
+        is_half_step = (self.progress_buf[0] == int((self.max_episode_length - 1)/2))        
 
         # In this policy, episode length is constant across all envs
         is_last_step = (self.progress_buf[0] == self.max_episode_length - 1)
 
+        # if is_half_step:        
+        #     # Check if nut is picked up and above table
+        #     lift_success = self._check_lift_success()
+        #     self.rew_buf[:] += lift_success * self.cfg_task.rl.success_bonus
+        #     self.extras['successes'] = torch.mean(lift_success.float())
+
         if is_last_step:
-            self.extras['successes'] += torch.mean(curr_successes.float())
+            lift_success = self._check_lift_success()
+            self.rew_buf[:] += lift_success * self.cfg_task.rl.success_bonus
+            # self.extras['successes'] += torch.mean(curr_successes.float())
+            self.extras['successes'] = torch.mean(curr_successes.float())
 
     def _update_reset_buf(self, curr_failures):
         """Assign environments for reset if successful or failed."""
@@ -431,7 +444,7 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
         self.generate_ctrl_signals()
 
-    def _check_lift_success(self, height_thresh=0.01):
+    def _check_lift_success(self, height_thresh=0.02):
         """Check if nut is above table by more than specified multiple times height of nut."""
 
         lift_success = torch.where(
@@ -463,7 +476,7 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
             self.render()
             self.gym.simulate(self.sim)
 
-    def _lift_gripper(self, franka_gripper_width=0.0, lift_distance=0.3, sim_steps=20):
+    def _lift_gripper(self, franka_gripper_width=0.0, lift_distance=0.03, sim_steps=20):
         """Lift gripper by specified distance. Called outside RL loop (i.e., after last step of episode)."""
 
         delta_hand_pose = torch.zeros([self.num_envs, 6], device=self.device)

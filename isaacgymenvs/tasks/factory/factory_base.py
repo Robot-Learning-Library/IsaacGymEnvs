@@ -101,7 +101,7 @@ class FactoryBase(VecTask, FactoryABCBase):
         self.sim_params.physx.contact_offset = 0.005  # default = 0.02
         self.sim_params.physx.bounce_threshold_velocity = 0.2  # default = 0.01
         self.sim_params.physx.max_depenetration_velocity = 5.0  # default = 100.0
-        self.sim_params.physx.friction_offset_threshold = 0.01  # default = 0.04
+        self.sim_params.physx.friction_offset_threshold = 0.04  # default = 0.04
         self.sim_params.physx.friction_correlation_distance = 0.00625  # default = 0.025
 
         self.sim_params.physx.max_gpu_contact_pairs = 1024 ** 2  # default = 1024^2

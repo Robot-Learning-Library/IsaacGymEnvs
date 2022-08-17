@@ -45,6 +45,7 @@ import isaacgymenvs.tasks.factory.factory_control as fc
 from isaacgymenvs.tasks.factory.factory_env_insertion import FactoryEnvInsertion
 from isaacgymenvs.tasks.factory.factory_schema_class_task import FactoryABCTask
 from isaacgymenvs.tasks.factory.factory_schema_config_task import FactorySchemaConfigTask
+from isaacgymenvs.utils import torch_jit_utils
 
 
 class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
@@ -89,30 +90,82 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
         """Acquire tensors."""
         # target_heights = self.cfg_base.env.table_height + self.bolt_head_heights + self.nut_heights * 0.5
         # self.target_pos = target_heights * torch.tensor([0.0, 0.0, 1.0], device=self.device).repeat((self.num_envs, 1))
-        pass
+        
+        # Grasp pose tensors
+        self.plug_heights = 0.005  # this should be given from yaml file
+        self.socket_heights = 0.0
+        plug_grasp_heights = self.socket_heights + self.plug_heights * 0.5  # nut COM
+        self.plug_grasp_pos_local = plug_grasp_heights * torch.tensor([0.0, 0.0, 1.0], device=self.device).repeat(
+            (self.num_envs, 1))
+        self.plug_grasp_quat_local = torch.tensor([0.0, 1.0, 0.0, 0.0], device=self.device).unsqueeze(0).repeat(
+            self.num_envs, 1)  # this is right when plug does not fall; after falling the best grasping orientation will not be this one
+
+        # Keypoint tensors
+        self.keypoint_offsets = self._get_keypoint_offsets(
+            self.cfg_task.rl.num_keypoints) * self.cfg_task.rl.keypoint_scale
+        self.keypoints_gripper = torch.zeros((self.num_envs, self.cfg_task.rl.num_keypoints, 3),
+                                             dtype=torch.float32,
+                                             device=self.device)
+        self.keypoints_plug = torch.zeros_like(self.keypoints_gripper, device=self.device)
+
+        self.identity_quat = torch.tensor([0.0, 0.0, 0.0, 1.0], device=self.device).unsqueeze(0).repeat(self.num_envs, 1)
+               
 
     def _refresh_task_tensors(self):
         """Refresh tensors."""
+        # Compute pose of plug grasping frame
+        self.plug_grasp_quat, self.plug_grasp_pos = torch_jit_utils.tf_combine(self.plug_quat,
+                                                                             self.plug_pos,
+                                                                             self.plug_grasp_quat_local,
+                                                                             self.plug_grasp_pos_local)
+
+        # Compute pos of keypoints on gripper and nut in world frame
+        for idx, keypoint_offset in enumerate(self.keypoint_offsets):
+            self.keypoints_gripper[:, idx] = torch_jit_utils.tf_combine(self.fingertip_midpoint_quat,
+                                                                        self.fingertip_midpoint_pos,
+                                                                        self.identity_quat,
+                                                                        keypoint_offset.repeat(self.num_envs, 1))[1]
+            self.keypoints_plug[:, idx] = torch_jit_utils.tf_combine(self.plug_grasp_quat,
+                                                                    self.plug_grasp_pos,
+                                                                    self.identity_quat,
+                                                                    keypoint_offset.repeat(self.num_envs, 1))[1]
+
+
         self.fingerpad_midpoint_pos = fc.translate_along_local_z(pos=self.finger_midpoint_pos,
                                                                  quat=self.hand_quat,
                                                                  offset=self.asset_info_franka_table.franka_finger_length - self.asset_info_franka_table.franka_fingerpad_length * 0.5,
                                                                  device=self.device)
         # self.finger_plug_keypoint_dist = self._get_keypoint_dist(body='finger_plug')
-
         # self.plug_keypoint_dist = self._get_keypoint_dist(body='plug')
-        self.plug_com_pos = fc.translate_along_local_z(pos=self.plug_pos,
-                                                      quat=self.plug_quat,
-                                                    #   offset=self.bolt_head_heights + self.nut_heights * 0.5,
-                                                      offset = 0.002,  # needs more accurate value here
-                                                      device=self.device)
 
-        self.plug_dist_to_fingerpads = torch.norm(self.fingertip_midpoint_pos - self.plug_com_pos, p=2,
-                                                 dim=-1)  # distance between plug and midpoint between centers of fingerpads
+        # self.plug_com_pos = fc.translate_along_local_z(pos=self.plug_pos,
+        #                                               quat=self.plug_quat,
+        #                                             #   offset=self.bolt_head_heights + self.nut_heights * 0.5,
+        #                                               offset = 0.002,  # needs more accurate value here
+        #                                               device=self.device)
+
+        self.plug_dist_to_fingerpads = torch.norm(self.fingerpad_midpoint_pos - self.plug_pos, p=2, dim=-1)  # distance between plug and midpoint between centers of fingerpads
         self.finger_plug_keypoint_dist = self.plug_dist_to_fingerpads
-        self.socket_dist_to_plug = torch.norm(self.plug_com_pos - self.socket_pos, p=2,
-                                                 dim=-1)  # distance between socket and plug between centers of fingerpads
+        self.socket_dist_to_plug = torch.norm(self.plug_pos - self.socket_pos, p=2,
+                                                 dim=-1)  # distance between socket and plug
+
+    def _get_keypoint_offsets(self, num_keypoints):
+        """Get uniformly-spaced keypoints along a line of unit length, centered at 0."""
+
+        keypoint_offsets = torch.zeros((num_keypoints, 3), device=self.device)
+        keypoint_offsets[:, -1] = torch.linspace(0.0, 1.0, num_keypoints, device=self.device) - 0.5
+
+        return keypoint_offsets
 
     def _get_keypoint_dist(self, body):
+        """Get keypoint distance."""
+
+        if body == 'finger_plug':
+            keypoint_dist = torch.sum(torch.norm(self.keypoints_plug - self.keypoints_gripper, p=2, dim=-1), dim=-1)
+
+        return keypoint_dist
+
+    def _get_keypoint_dist_deprecated(self, body):
         """Get keypoint distances."""
 
         axis_length = self.asset_info_franka_table.franka_hand_length + self.asset_info_franka_table.franka_finger_length
@@ -181,7 +234,7 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
                                                 ctrl_target_gripper_dof_pos=self.asset_info_franka_table.franka_gripper_width_max,
                                                 do_scale=True)
         else:  # keep the gripper close
-            self.actions = torch.zeros_like(self.actions).to(self.device)   # keep static
+            # self.actions = torch.zeros_like(self.actions).to(self.device)   # keep static
             self._apply_actions_as_ctrl_targets(actions=self.actions,
                                     ctrl_target_gripper_dof_pos=0.,
                                     do_scale=True)
@@ -215,8 +268,10 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
                        self.fingertip_midpoint_angvel,
                        self.plug_pos,
                        self.plug_quat,
-                       self.plug_linvel,
-                       self.plug_angvel,
+                    #    self.plug_linvel,
+                    #    self.plug_angvel,
+                    #    self.plug_grasp_pos,
+                    #    self.plug_grasp_quat,
                        self.socket_pos,
                        self.socket_quat
                        ]
@@ -272,7 +327,7 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
         #         -1) + self.bolt_shank_lengths.squeeze(-1) + self.nut_heights.squeeze(-1) * 0.5)
 
         curr_failures = torch.logical_or(curr_failures, self.is_expired)
-        curr_failures = torch.logical_or(curr_failures, self.is_far)
+        # curr_failures = torch.logical_or(curr_failures, self.is_far)
         # curr_failures = torch.logical_or(curr_failures, self.is_slipped)
         # curr_failures = torch.logical_or(curr_failures, self.is_fallen)
 
@@ -289,8 +344,16 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
     def _update_rew_buf(self, curr_successes):
         """Compute reward at current timestep."""
-        # keypoint_reward = -(self.finger_plug_keypoint_dist + self.socket_dist_to_plug)
-        keypoint_reward = -(self.finger_plug_keypoint_dist)
+        # In this policy, episode length is constant across all envs
+        after_half_step = (self.progress_buf[0] == int((self.max_episode_length - 1)/2+1))        
+
+        # In this policy, episode length is constant across all envs
+        is_last_step = (self.progress_buf[0] == self.max_episode_length - 1)
+
+        if self.progress_buf[0] < after_half_step:
+            keypoint_reward = -self.finger_plug_keypoint_dist
+        else:
+            keypoint_reward = -self.socket_dist_to_plug
 
         action_penalty = torch.norm(self.actions, p=2, dim=-1)
 
@@ -298,23 +361,17 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
                           - action_penalty * self.cfg_task.rl.action_penalty_scale \
                           + curr_successes * self.cfg_task.rl.success_bonus
 
-        # In this policy, episode length is constant across all envs
-        is_half_step = (self.progress_buf[0] == int((self.max_episode_length - 1)/2))        
-
-        # In this policy, episode length is constant across all envs
-        is_last_step = (self.progress_buf[0] == self.max_episode_length - 1)
-
-        # if is_half_step:        
-        #     # Check if nut is picked up and above table
-        #     lift_success = self._check_lift_success()
-        #     self.rew_buf[:] += lift_success * self.cfg_task.rl.success_bonus
-        #     self.extras['successes'] = torch.mean(lift_success.float())
-
-        if is_last_step:
+        if after_half_step:        
+            # Check if plug is picked up and above table
             lift_success = self._check_lift_success()
             self.rew_buf[:] += lift_success * self.cfg_task.rl.success_bonus
-            # self.extras['successes'] += torch.mean(curr_successes.float())
+            # self.extras['successes'] = torch.mean(lift_success.float())
+            print('lift success rate: ', torch.mean(lift_success.float()) )
+
+        if is_last_step:
+            self.rew_buf[:] += curr_successes * self.cfg_task.rl.success_bonus
             self.extras['successes'] = torch.mean(curr_successes.float())
+            print('final success rate: ', self.extras['successes'].item())
 
     def _update_reset_buf(self, curr_failures):
         """Assign environments for reset if successful or failed."""
@@ -370,6 +427,12 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
                 torch.cat(((torch.rand((reset_num_envs, 1), device=self.device) * 2.0 - 1.0) * self.cfg_task.randomize.plug_noise_xy,
                            self.cfg_task.randomize.plug_bias_y + (torch.rand((reset_num_envs, 1), device=self.device) * 2.0 - 1.0) * self.cfg_task.randomize.plug_noise_xy,
                            torch.ones((reset_num_envs, 1), device=self.device) * (self.cfg_base.env.table_height + self.cfg_task.randomize.plug_bias_z)), dim=1)
+            self.root_quat[env_ids, self.plug_actor_id_env] = torch.tensor([0.0, 0.0, 0.0, 1.0], dtype=torch.float32,
+                                                                        device=self.device).repeat(len(env_ids), 1)
+
+            self.root_linvel[env_ids, self.plug_actor_id_env] = 0.0
+            self.root_angvel[env_ids, self.plug_actor_id_env] = 0.0
+
         elif self.cfg_task.randomize.initial_state == 'goal':
             self.root_pos[env_ids, self.plug_actor_id_env] = torch.tensor([0.0, 0.0, self.cfg_base.env.table_height],
                                                                           device=self.device)
@@ -446,7 +509,6 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
     def _check_lift_success(self, height_thresh=0.02):
         """Check if nut is above table by more than specified multiple times height of nut."""
-
         lift_success = torch.where(
             self.plug_pos[:, 2] > self.cfg_base.env.table_height + height_thresh,
             torch.ones((self.num_envs,), device=self.device),

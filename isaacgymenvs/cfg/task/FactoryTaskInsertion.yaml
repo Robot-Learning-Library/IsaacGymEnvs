@@ -17,7 +17,7 @@ sim:
 
 env:
     numEnvs: 128
-    numObservations: 33
+    numObservations: 27 # 33
     numActions: 12
 
     close_and_lift: True  # close gripper and lift after last step of episode
@@ -34,7 +34,7 @@ randomize:
     plug_noise_xy: 0.05  # if random, XY-axis noise on plug position during each reset
 
 rl:
-    max_episode_length: 256
+    max_episode_length: 220
     pos_action_scale: [0.1, 0.1, 0.1]
     rot_action_scale: [0.1, 0.1, 0.1]
     force_action_scale: [1.0, 1.0, 1.0]
@@ -52,7 +52,7 @@ rl:
     add_obs_finger_force: False  # add observations of force on left and right fingers
 
     far_error_thresh: 0.400  # threshold above which plug is considered too far from socket
-    success_bonus: 1.0  # bonus if plug has been inserted in socket
+    success_bonus: 5.0  # bonus if plug has been inserted in socket
 
 
 ctrl:

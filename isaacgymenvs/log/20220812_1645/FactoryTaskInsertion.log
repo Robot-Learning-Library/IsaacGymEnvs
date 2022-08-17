@@ -1,0 +1,77 @@
+train.py:49: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name="config", config_path="./cfg")
+/home/zihan/anaconda3/lib/python3.7/site-packages/hydra/_internal/defaults_list.py:251: UserWarning: In 'config': Defaults list is missing `_self_`. See https://hydra.cc/docs/upgrades/1.0_to_1.1/default_composition_order for more information
+  warnings.warn(msg, UserWarning)
+/home/zihan/anaconda3/lib/python3.7/site-packages/hydra/_internal/defaults_list.py:415: UserWarning: In config: Invalid overriding of hydra/job_logging:
+Default list overrides requires 'override' keyword.
+See https://hydra.cc/docs/next/upgrades/1.0_to_1.1/defaults_list_override for more information.
+
+  deprecation_warning(msg)
+Importing module 'gym_37' (/home/zihan/software/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_37.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/zihan/software/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.12.0+cu102
+Device count 2
+/home/zihan/software/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Using /home/zihan/.cache/torch_extensions/py37_cu102 as PyTorch extensions root...
+Emitting ninja build file /home/zihan/.cache/torch_extensions/py37_cu102/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+/home/zihan/anaconda3/lib/python3.7/site-packages/hydra/_internal/hydra.py:127: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/next/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  configure_logging=with_log_configuration,
+[1/2] c++ -MMD -MF gymtorch.o.d -DTORCH_EXTENSION_NAME=gymtorch -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -isystem /home/zihan/anaconda3/lib/python3.7/site-packages/torch/include -isystem /home/zihan/anaconda3/lib/python3.7/site-packages/torch/include/torch/csrc/api/include -isystem /home/zihan/anaconda3/lib/python3.7/site-packages/torch/include/TH -isystem /home/zihan/anaconda3/lib/python3.7/site-packages/torch/include/THC -isystem /home/zihan/anaconda3/include/python3.7m -D_GLIBCXX_USE_CXX11_ABI=0 -fPIC -std=c++14 -DTORCH_MAJOR=1 -DTORCH_MINOR=12 -c /home/zihan/software/isaacgym/python/isaacgym/_bindings/src/gymtorch/gymtorch.cpp -o gymtorch.o 
+[2/2] c++ gymtorch.o -shared -L/home/zihan/anaconda3/lib/python3.7/site-packages/torch/lib -lc10 -ltorch_cpu -ltorch -ltorch_python -o gymtorch.so
+Error executing job with overrides: ['task=FactoryTaskInsertion', 'headless=True', 'wandb_activate=True', 'wandb_entity=quantumiracle']
+An error occurred during Hydra's exception formatting:
+AssertionError()
+Loading extension module gymtorch...
+Traceback (most recent call last):
+  File "/home/zihan/anaconda3/lib/python3.7/site-packages/hydra/_internal/utils.py", line 254, in run_and_report
+    assert mdl is not None
+AssertionError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "train.py", line 188, in <module>
+    launch_rlg_hydra()
+  File "/home/zihan/anaconda3/lib/python3.7/site-packages/hydra/main.py", line 95, in decorated_main
+    config_name=config_name,
+  File "/home/zihan/anaconda3/lib/python3.7/site-packages/hydra/_internal/utils.py", line 396, in _run_hydra
+    overrides=overrides,
+  File "/home/zihan/anaconda3/lib/python3.7/site-packages/hydra/_internal/utils.py", line 453, in _run_app
+    lambda: hydra.run(
+  File "/home/zihan/anaconda3/lib/python3.7/site-packages/hydra/_internal/utils.py", line 296, in run_and_report
+    raise ex
+  File "/home/zihan/anaconda3/lib/python3.7/site-packages/hydra/_internal/utils.py", line 213, in run_and_report
+    return func()
+  File "/home/zihan/anaconda3/lib/python3.7/site-packages/hydra/_internal/utils.py", line 456, in <lambda>
+    overrides=overrides,
+  File "/home/zihan/anaconda3/lib/python3.7/site-packages/hydra/_internal/hydra.py", line 132, in run
+    _ = ret.return_value
+  File "/home/zihan/anaconda3/lib/python3.7/site-packages/hydra/core/utils.py", line 260, in return_value
+    raise self._return_value
+  File "/home/zihan/anaconda3/lib/python3.7/site-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+  File "train.py", line 51, in launch_rlg_hydra
+    from isaacgymenvs.utils.rlgames_utils import RLGPUEnv, RLGPUAlgoObserver, get_rlgames_env_creator
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/utils/rlgames_utils.py", line 37, in <module>
+    from isaacgymenvs.tasks import isaacgym_task_map
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/__init__.py", line 30, in <module>
+    from .ant import Ant
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/ant.py", line 33, in <module>
+    from isaacgym import gymtorch
+  File "/home/zihan/software/isaacgym/python/isaacgym/gymtorch.py", line 109, in <module>
+    _import_gymtorch()
+  File "/home/zihan/software/isaacgym/python/isaacgym/gymtorch.py", line 45, in _import_gymtorch
+    gt = torch.utils.cpp_extension.load(name="gymtorch", sources=sources, extra_cflags=cflags, verbose=True)
+  File "/home/zihan/anaconda3/lib/python3.7/site-packages/torch/utils/cpp_extension.py", line 1214, in load
+    keep_intermediates=keep_intermediates)
+  File "/home/zihan/anaconda3/lib/python3.7/site-packages/torch/utils/cpp_extension.py", line 1450, in _jit_compile
+    return _import_module_from_library(name, build_directory, is_python_module)
+  File "/home/zihan/anaconda3/lib/python3.7/site-packages/torch/utils/cpp_extension.py", line 1844, in _import_module_from_library
+    module = importlib.util.module_from_spec(spec)
+ImportError: /home/zihan/anaconda3/bin/../lib/libstdc++.so.6: version `GLIBCXX_3.4.26' not found (required by /home/zihan/.cache/torch_extensions/py37_cu102/gymtorch/gymtorch.so)

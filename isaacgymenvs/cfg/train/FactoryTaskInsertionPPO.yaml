@@ -54,7 +54,7 @@ params:
     schedule_type: standard
     kl_threshold: 0.016
     score_to_win: 20000
-    max_epochs: ${resolve_default:81920,${....max_iterations}}
+    max_epochs: ${resolve_default:16384,${....max_iterations}}   # 8192
     save_best_after: 50
     save_frequency: 100
     print_stats: True
@@ -62,7 +62,7 @@ params:
     entropy_coef: 0.0
     truncate_grads: False
     e_clip: 0.2
-    horizon_length: 32
+    horizon_length: 120
     minibatch_size: 512  # batch size = num_envs * horizon_length; minibatch_size = batch_size / num_minibatches
     mini_epochs: 8
     critic_coef: 2

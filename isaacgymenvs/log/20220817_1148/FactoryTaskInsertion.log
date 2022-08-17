@@ -1,0 +1,1847 @@
+train.py:49: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name="config", config_path="./cfg")
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/hydra/_internal/defaults_list.py:251: UserWarning: In 'config': Defaults list is missing `_self_`. See https://hydra.cc/docs/upgrades/1.0_to_1.1/default_composition_order for more information
+  warnings.warn(msg, UserWarning)
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/hydra/_internal/defaults_list.py:415: UserWarning: In config: Invalid overriding of hydra/job_logging:
+Default list overrides requires 'override' keyword.
+See https://hydra.cc/docs/next/upgrades/1.0_to_1.1/defaults_list_override for more information.
+
+  deprecation_warning(msg)
+Importing module 'gym_37' (/home/zihan/software/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_37.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/zihan/software/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.12.0+cu102
+Device count 2
+/home/zihan/software/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Using /home/zihan/.cache/torch_extensions/py37_cu102 as PyTorch extensions root...
+Emitting ninja build file /home/zihan/.cache/torch_extensions/py37_cu102/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/hydra/_internal/hydra.py:127: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/next/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  configure_logging=with_log_configuration,
+ninja: no work to do.
+/home/zihan/software/isaacgym/python/isaacgym/torch_utils.py:135: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  def get_axis_params(value, axis_idx, x_value=0., dtype=np.float, n_dims=3):
+2022-08-17 11:48:38,958 - INFO - logger - logger initialized
+2022-08-17 11:48:39.998467: I tensorflow/core/util/util.cc:169] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+<unknown>:6: DeprecationWarning: invalid escape sequence \*
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/flatbuffers/compat.py:19: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/keras/utils/image_utils.py:36: DeprecationWarning: NEAREST is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.NEAREST or Dither.NONE instead.
+  'nearest': pil_image.NEAREST,
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/keras/utils/image_utils.py:37: DeprecationWarning: BILINEAR is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BILINEAR instead.
+  'bilinear': pil_image.BILINEAR,
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/keras/utils/image_utils.py:38: DeprecationWarning: BICUBIC is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BICUBIC instead.
+  'bicubic': pil_image.BICUBIC,
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/keras/utils/image_utils.py:39: DeprecationWarning: HAMMING is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.HAMMING instead.
+  'hamming': pil_image.HAMMING,
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/keras/utils/image_utils.py:40: DeprecationWarning: BOX is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BOX instead.
+  'box': pil_image.BOX,
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/keras/utils/image_utils.py:41: DeprecationWarning: LANCZOS is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.LANCZOS instead.
+  'lanczos': pil_image.LANCZOS,
+wandb: Currently logged in as: quantumiracle (use `wandb login --relogin` to force relogin)
+Loading extension module gymtorch...
+Error: FBX library failed to load - importing FBX data will not succeed. Message: No module named 'fbx'
+FBX tools must be installed from https://help.autodesk.com/view/FBX/2020/ENU/?guid=FBX_Developer_Help_scripting_with_python_fbx_installing_python_fbx_html
+task: 
+    name: FactoryTaskInsertion
+    physics_engine: physx
+    sim: 
+        use_gpu_pipeline: True
+        up_axis: z
+        dt: 0.016667
+        gravity: [0.0, 0.0, -9.81]
+        disable_gravity: False
+    env: 
+        numEnvs: 128
+        numObservations: 27
+        numActions: 12
+        close_and_lift: True
+        num_gripper_move_sim_steps: 20
+        num_gripper_close_sim_steps: 25
+        num_gripper_lift_sim_steps: 25
+    randomize: 
+        joint_noise: 0.0
+        initial_state: random
+        plug_bias_y: -0.1
+        plug_bias_z: 0.0
+        plug_noise_xy: 0.05
+    rl: 
+        max_episode_length: 220
+        pos_action_scale: [0.1, 0.1, 0.1]
+        rot_action_scale: [0.1, 0.1, 0.1]
+        force_action_scale: [1.0, 1.0, 1.0]
+        torque_action_scale: [1.0, 1.0, 1.0]
+        gripper_action_scale: [1.0]
+        clamp_rot: True
+        clamp_rot_thresh: 1e-06
+        num_keypoints: 4
+        keypoint_scale: 0.5
+        keypoint_reward_scale: 1.0
+        action_penalty_scale: 0.0
+        add_obs_finger_force: False
+        far_error_thresh: 0.4
+        success_bonus: 5.0
+    ctrl: 
+        ctrl_type: joint_space_id
+        all: 
+            jacobian_type: geometric
+            gripper_prop_gains: [50, 50]
+            gripper_deriv_gains: [2, 2]
+        gym_default: 
+            ik_method: dls
+            joint_prop_gains: [40, 40, 40, 40, 40, 40, 40]
+            joint_deriv_gains: [8, 8, 8, 8, 8, 8, 8]
+            gripper_prop_gains: [500, 500]
+            gripper_deriv_gains: [20, 20]
+        joint_space_ik: 
+            ik_method: dls
+            joint_prop_gains: [1, 1, 1, 1, 1, 1, 1]
+            joint_deriv_gains: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+        joint_space_id: 
+            ik_method: dls
+            joint_prop_gains: [40, 40, 40, 40, 40, 40, 40]
+            joint_deriv_gains: [8, 8, 8, 8, 8, 8, 8]
+        task_space_impedance: 
+            motion_ctrl_axes: [1, 1, 1, 1, 1, 1]
+            task_prop_gains: [40, 40, 40, 40, 40, 40]
+            task_deriv_gains: [8, 8, 8, 8, 8, 8]
+        operational_space_motion: 
+            motion_ctrl_axes: [1, 1, 1, 1, 1, 1]
+            task_prop_gains: [1, 1, 1, 1, 1, 1]
+            task_deriv_gains: [1, 1, 1, 1, 1, 1]
+        open_loop_force: 
+            force_ctrl_axes: [0, 0, 1, 0, 0, 0]
+        closed_loop_force: 
+            force_ctrl_axes: [0, 0, 1, 0, 0, 0]
+            wrench_prop_gains: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+        hybrid_force_motion: 
+            motion_ctrl_axes: [1, 1, 0, 1, 1, 1]
+            task_prop_gains: [40, 40, 40, 40, 40, 40]
+            task_deriv_gains: [8, 8, 8, 8, 8, 8]
+            force_ctrl_axes: [0, 0, 1, 0, 0, 0]
+            wrench_prop_gains: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+train: 
+    params: 
+        seed: 42
+        algo: 
+            name: a2c_continuous
+        model: 
+            name: continuous_a2c_logstd
+        network: 
+            name: actor_critic
+            separate: False
+            space: 
+                continuous: 
+                    mu_activation: None
+                    sigma_activation: None
+                    mu_init: 
+                        name: default
+                    sigma_init: 
+                        name: const_initializer
+                        val: 0
+                    fixed_sigma: True
+            mlp: 
+                units: [256, 128, 64]
+                activation: elu
+                d2rl: False
+                initializer: 
+                    name: default
+                regularizer: 
+                    name: None
+        load_checkpoint: True
+        load_path: /home/zihan/research/IsaacGymEnvs/isaacgymenvs/runs/FactoryTaskInsertion/nn/20220812165033/FactoryTaskInsertion.pth
+        config: 
+            name: FactoryTaskInsertion
+            full_experiment_name: FactoryTaskInsertion
+            env_name: rlgpu
+            multi_gpu: False
+            ppo: True
+            mixed_precision: True
+            normalize_input: True
+            normalize_value: True
+            value_bootstrap: True
+            num_actors: 128
+            reward_shaper: 
+                scale_value: 1.0
+            normalize_advantage: True
+            gamma: 0.99
+            tau: 0.95
+            learning_rate: 0.0001
+            lr_schedule: fixed
+            schedule_type: standard
+            kl_threshold: 0.016
+            score_to_win: 20000
+            max_epochs: 16384
+            save_best_after: 50
+            save_frequency: 100
+            print_stats: True
+            grad_norm: 1.0
+            entropy_coef: 0.0
+            truncate_grads: False
+            e_clip: 0.2
+            horizon_length: 120
+            minibatch_size: 512
+            mini_epochs: 8
+            critic_coef: 2
+            clip_value: True
+            seq_len: 4
+            bounds_loss_coef: 0.0001
+task_name: FactoryTaskInsertion
+experiment: 
+num_envs: 
+seed: 42
+torch_deterministic: False
+max_iterations: 
+physics_engine: physx
+pipeline: gpu
+sim_device: cuda:0
+rl_device: cuda:0
+graphics_device_id: 0
+num_threads: 4
+solver_type: 1
+num_subscenes: 4
+test: False
+checkpoint: /home/zihan/research/IsaacGymEnvs/isaacgymenvs/runs/FactoryTaskInsertion/nn/20220812165033/FactoryTaskInsertion.pth
+multi_gpu: False
+wandb_activate: True
+wandb_group: 
+wandb_name: FactoryTaskInsertion
+wandb_entity: quantumiracle
+wandb_project: isaacgymenvs
+capture_video: False
+capture_video_freq: 1464
+capture_video_len: 100
+force_render: True
+headless: True
+Setting seed: 42
+2022-08-17 11:48:42.891200: I tensorflow/core/util/util.cc:169] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+wandb: wandb version 0.13.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.12.11
+wandb: Run data is saved locally in /home/zihan/research/IsaacGymEnvs/isaacgymenvs/wandb/run-20220817_114841-26d5se98
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run FactoryTaskInsertion_2022-08-17_11-48-39
+wandb: ⭐️ View project at https://wandb.ai/quantumiracle/isaacgymenvs
+wandb: 🚀 View run at https://wandb.ai/quantumiracle/isaacgymenvs/runs/26d5se98
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Using SDF cache directory '/home/zihan/.isaacgym/sdf_V100'
+~!~!~! Loaded/Cooked SDF triangle mesh 0 @ 0x5570e1f80c00, resolution=256, spacing=0.000195
+  ~!~! Bounds:  (-0.007992, 0.007992) (-0.007992, 0.007992) (-0.000000, 0.050000)
+  ~!~! Extents: (0.015983, 0.015983, 0.050000)
+  ~!~! Resolution: (82, 82, 256)
+~!~!~! Loaded/Cooked SDF triangle mesh 1 @ 0x5570e1af3320, resolution=256, spacing=0.000098
+  ~!~! Bounds:  (-0.012500, 0.012500) (-0.012500, 0.012500) (0.000000, 0.008992)
+  ~!~! Extents: (0.025000, 0.025000, 0.008992)
+  ~!~! Resolution: (256, 256, 93)
+self.seed = 42
+Started to train
+Exact experiment name requested from command line: FactoryTaskInsertion
+Box(-1.0, 1.0, (12,), float32) Box(-inf, inf, (27,), float32)
+current training device: cuda:0
+build mlp: 27
+RunningMeanStd:  (1,)
+RunningMeanStd:  (27,)
+=> loading checkpoint '/home/zihan/research/IsaacGymEnvs/isaacgymenvs/runs/FactoryTaskInsertion/nn/20220812165033/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.8281, device='cuda:0')
+fps step: 5714 fps step and policy inference: 4966 fps total: 3295 epoch: 216/16384
+final success rate:  0.0
+fps step: 7028 fps step and policy inference: 6355 fps total: 3929 epoch: 217/16384
+saving next best rewards:  [-30.66]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.8828, device='cuda:0')
+fps step: 5594 fps step and policy inference: 5164 fps total: 3441 epoch: 218/16384
+final success rate:  0.0
+fps step: 7527 fps step and policy inference: 6758 fps total: 4080 epoch: 219/16384
+lift success rate:  tensor(0.8672, device='cuda:0')
+fps step: 5403 fps step and policy inference: 4995 fps total: 3365 epoch: 220/16384
+final success rate:  0.0
+fps step: 7445 fps step and policy inference: 6693 fps total: 4058 epoch: 221/16384
+lift success rate:  tensor(0.9375, device='cuda:0')
+fps step: 5481 fps step and policy inference: 5064 fps total: 3392 epoch: 222/16384
+final success rate:  0.0
+fps step: 7496 fps step and policy inference: 6734 fps total: 4070 epoch: 223/16384
+lift success rate:  tensor(0.8906, device='cuda:0')
+fps step: 5496 fps step and policy inference: 5072 fps total: 3391 epoch: 224/16384
+final success rate:  0.0
+fps step: 7695 fps step and policy inference: 6891 fps total: 3703 epoch: 225/16384
+saving next best rewards:  [-29.46]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9219, device='cuda:0')
+final success rate:  0.0
+fps step: 5583 fps step and policy inference: 5242 fps total: 2124 epoch: 226/16384
+lift success rate:  tensor(0.9219, device='cuda:0')
+fps step: 6320 fps step and policy inference: 5886 fps total: 2223 epoch: 227/16384
+final success rate:  0.0
+fps step: 7442 fps step and policy inference: 6846 fps total: 2344 epoch: 228/16384
+saving next best rewards:  [-29.29]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9297, device='cuda:0')
+fps step: 5996 fps step and policy inference: 5607 fps total: 2177 epoch: 229/16384
+final success rate:  0.0
+fps step: 7742 fps step and policy inference: 7087 fps total: 2366 epoch: 230/16384
+saving next best rewards:  [-28.23]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9297, device='cuda:0')
+fps step: 5808 fps step and policy inference: 5439 fps total: 2153 epoch: 231/16384
+final success rate:  0.0
+fps step: 8084 fps step and policy inference: 7384 fps total: 2404 epoch: 232/16384
+lift success rate:  tensor(0.9375, device='cuda:0')
+fps step: 5825 fps step and policy inference: 5449 fps total: 2153 epoch: 233/16384
+final success rate:  0.0
+fps step: 8045 fps step and policy inference: 7350 fps total: 2392 epoch: 234/16384
+saving next best rewards:  [-25.91]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.8516, device='cuda:0')
+fps step: 5697 fps step and policy inference: 5343 fps total: 2136 epoch: 235/16384
+final success rate:  0.0
+fps step: 8322 fps step and policy inference: 7583 fps total: 2424 epoch: 236/16384
+lift success rate:  tensor(0.8750, device='cuda:0')
+final success rate:  0.0
+fps step: 5593 fps step and policy inference: 5247 fps total: 2110 epoch: 237/16384
+saving next best rewards:  [-23.99]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.8203, device='cuda:0')
+fps step: 6267 fps step and policy inference: 5842 fps total: 2209 epoch: 238/16384
+final success rate:  0.0
+fps step: 7397 fps step and policy inference: 6807 fps total: 2337 epoch: 239/16384
+saving next best rewards:  [-23.67]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.7656, device='cuda:0')
+fps step: 5894 fps step and policy inference: 5511 fps total: 2179 epoch: 240/16384
+final success rate:  0.0
+fps step: 7632 fps step and policy inference: 7004 fps total: 2378 epoch: 241/16384
+saving next best rewards:  [-22.65]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.7891, device='cuda:0')
+fps step: 5749 fps step and policy inference: 5388 fps total: 2156 epoch: 242/16384
+final success rate:  0.0
+fps step: 7787 fps step and policy inference: 7128 fps total: 2388 epoch: 243/16384
+lift success rate:  tensor(0.7422, device='cuda:0')
+fps step: 5598 fps step and policy inference: 5254 fps total: 2133 epoch: 244/16384
+final success rate:  0.0
+fps step: 7792 fps step and policy inference: 7135 fps total: 2372 epoch: 245/16384
+lift success rate:  tensor(0.7188, device='cuda:0')
+fps step: 5602 fps step and policy inference: 5258 fps total: 2114 epoch: 246/16384
+final success rate:  0.0
+fps step: 7926 fps step and policy inference: 7256 fps total: 2380 epoch: 247/16384
+saving next best rewards:  [-21.4]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.7422, device='cuda:0')
+final success rate:  0.0
+fps step: 5379 fps step and policy inference: 5060 fps total: 2087 epoch: 248/16384
+lift success rate:  tensor(0.7188, device='cuda:0')
+fps step: 6037 fps step and policy inference: 5634 fps total: 2178 epoch: 249/16384
+final success rate:  0.0
+fps step: 7409 fps step and policy inference: 6818 fps total: 2338 epoch: 250/16384
+saving next best rewards:  [-21.11]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.6562, device='cuda:0')
+fps step: 5736 fps step and policy inference: 5381 fps total: 2138 epoch: 251/16384
+final success rate:  0.0
+fps step: 7446 fps step and policy inference: 6852 fps total: 2338 epoch: 252/16384
+saving next best rewards:  [-20.32]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.6797, device='cuda:0')
+fps step: 5518 fps step and policy inference: 5187 fps total: 2109 epoch: 253/16384
+final success rate:  0.0
+fps step: 7479 fps step and policy inference: 6880 fps total: 2343 epoch: 254/16384
+lift success rate:  tensor(0.7188, device='cuda:0')
+fps step: 5498 fps step and policy inference: 5168 fps total: 2109 epoch: 255/16384
+final success rate:  0.0
+fps step: 7596 fps step and policy inference: 6980 fps total: 2356 epoch: 256/16384
+lift success rate:  tensor(0.6562, device='cuda:0')
+fps step: 5422 fps step and policy inference: 5100 fps total: 2091 epoch: 257/16384
+final success rate:  0.0
+fps step: 7827 fps step and policy inference: 7172 fps total: 2375 epoch: 258/16384
+lift success rate:  tensor(0.6719, device='cuda:0')
+final success rate:  0.0
+fps step: 5350 fps step and policy inference: 5035 fps total: 2077 epoch: 259/16384
+saving next best rewards:  [-19.42]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.6328, device='cuda:0')
+fps step: 5994 fps step and policy inference: 5604 fps total: 2172 epoch: 260/16384
+final success rate:  0.0
+fps step: 7329 fps step and policy inference: 6748 fps total: 2326 epoch: 261/16384
+lift success rate:  tensor(0.6797, device='cuda:0')
+fps step: 5640 fps step and policy inference: 5287 fps total: 2123 epoch: 262/16384
+final success rate:  0.0
+fps step: 7342 fps step and policy inference: 6765 fps total: 2328 epoch: 263/16384
+lift success rate:  tensor(0.6172, device='cuda:0')
+fps step: 5514 fps step and policy inference: 5181 fps total: 2112 epoch: 264/16384
+final success rate:  0.0
+fps step: 7473 fps step and policy inference: 6876 fps total: 2342 epoch: 265/16384
+saving next best rewards:  [-19.05]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.6328, device='cuda:0')
+fps step: 5314 fps step and policy inference: 4994 fps total: 2074 epoch: 266/16384
+final success rate:  0.0
+fps step: 7505 fps step and policy inference: 6901 fps total: 2344 epoch: 267/16384
+saving next best rewards:  [-18.52]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.5234, device='cuda:0')
+fps step: 5530 fps step and policy inference: 5195 fps total: 2108 epoch: 268/16384
+final success rate:  0.0
+fps step: 7708 fps step and policy inference: 7068 fps total: 2356 epoch: 269/16384
+lift success rate:  tensor(0.6641, device='cuda:0')
+final success rate:  0.0
+fps step: 5310 fps step and policy inference: 5001 fps total: 2077 epoch: 270/16384
+saving next best rewards:  [-17.28]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.6016, device='cuda:0')
+fps step: 5987 fps step and policy inference: 5600 fps total: 2177 epoch: 271/16384
+final success rate:  0.0
+fps step: 7269 fps step and policy inference: 6702 fps total: 2320 epoch: 272/16384
+lift success rate:  tensor(0.7656, device='cuda:0')
+fps step: 5765 fps step and policy inference: 5404 fps total: 2142 epoch: 273/16384
+final success rate:  0.0
+fps step: 7256 fps step and policy inference: 6686 fps total: 2317 epoch: 274/16384
+lift success rate:  tensor(0.7188, device='cuda:0')
+fps step: 5587 fps step and policy inference: 5247 fps total: 2118 epoch: 275/16384
+final success rate:  0.0
+fps step: 7502 fps step and policy inference: 6897 fps total: 2344 epoch: 276/16384
+lift success rate:  tensor(0.7109, device='cuda:0')
+fps step: 5519 fps step and policy inference: 5186 fps total: 2105 epoch: 277/16384
+final success rate:  0.0
+fps step: 7454 fps step and policy inference: 6861 fps total: 2340 epoch: 278/16384
+lift success rate:  tensor(0.6953, device='cuda:0')
+fps step: 5416 fps step and policy inference: 5095 fps total: 2098 epoch: 279/16384
+final success rate:  0.0
+fps step: 7687 fps step and policy inference: 7056 fps total: 2362 epoch: 280/16384
+lift success rate:  tensor(0.6719, device='cuda:0')
+final success rate:  0.0
+fps step: 5265 fps step and policy inference: 4961 fps total: 2071 epoch: 281/16384
+lift success rate:  tensor(0.6562, device='cuda:0')
+fps step: 5957 fps step and policy inference: 5572 fps total: 2171 epoch: 282/16384
+final success rate:  0.0
+fps step: 7103 fps step and policy inference: 6561 fps total: 2311 epoch: 283/16384
+lift success rate:  tensor(0.6016, device='cuda:0')
+fps step: 5666 fps step and policy inference: 5317 fps total: 2130 epoch: 284/16384
+final success rate:  0.0
+fps step: 7430 fps step and policy inference: 6839 fps total: 2337 epoch: 285/16384
+lift success rate:  tensor(0.6719, device='cuda:0')
+fps step: 5463 fps step and policy inference: 5134 fps total: 2098 epoch: 286/16384
+final success rate:  0.0
+fps step: 7385 fps step and policy inference: 6800 fps total: 2332 epoch: 287/16384
+lift success rate:  tensor(0.7500, device='cuda:0')
+fps step: 5370 fps step and policy inference: 5055 fps total: 2084 epoch: 288/16384
+final success rate:  0.0
+fps step: 7545 fps step and policy inference: 6934 fps total: 2349 epoch: 289/16384
+saving next best rewards:  [-17.06]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.5703, device='cuda:0')
+fps step: 5422 fps step and policy inference: 5102 fps total: 2093 epoch: 290/16384
+final success rate:  0.0
+fps step: 7736 fps step and policy inference: 7096 fps total: 2368 epoch: 291/16384
+lift success rate:  tensor(0.6562, device='cuda:0')
+final success rate:  0.0
+fps step: 5163 fps step and policy inference: 4869 fps total: 2055 epoch: 292/16384
+lift success rate:  tensor(0.7422, device='cuda:0')
+fps step: 5999 fps step and policy inference: 5609 fps total: 2171 epoch: 293/16384
+final success rate:  0.0
+fps step: 7082 fps step and policy inference: 6542 fps total: 2301 epoch: 294/16384
+lift success rate:  tensor(0.7031, device='cuda:0')
+fps step: 5668 fps step and policy inference: 5316 fps total: 2129 epoch: 295/16384
+final success rate:  0.0
+fps step: 7164 fps step and policy inference: 6612 fps total: 2309 epoch: 296/16384
+saving next best rewards:  [-14.36]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.6172, device='cuda:0')
+fps step: 5510 fps step and policy inference: 5179 fps total: 2105 epoch: 297/16384
+final success rate:  0.0
+fps step: 7350 fps step and policy inference: 6772 fps total: 2327 epoch: 298/16384
+lift success rate:  tensor(0.6484, device='cuda:0')
+fps step: 5401 fps step and policy inference: 5081 fps total: 2088 epoch: 299/16384
+final success rate:  0.0
+fps step: 7568 fps step and policy inference: 6957 fps total: 2353 epoch: 300/16384
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion_ep_300_rew_-17.876923.pth'
+lift success rate:  tensor(0.7656, device='cuda:0')
+fps step: 5416 fps step and policy inference: 5097 fps total: 2094 epoch: 301/16384
+final success rate:  0.0
+fps step: 7821 fps step and policy inference: 7164 fps total: 2371 epoch: 302/16384
+lift success rate:  tensor(0.7812, device='cuda:0')
+final success rate:  0.0
+fps step: 5212 fps step and policy inference: 4913 fps total: 2061 epoch: 303/16384
+lift success rate:  tensor(0.8203, device='cuda:0')
+fps step: 6052 fps step and policy inference: 5653 fps total: 2179 epoch: 304/16384
+final success rate:  0.0
+fps step: 7308 fps step and policy inference: 6735 fps total: 2326 epoch: 305/16384
+lift success rate:  tensor(0.7891, device='cuda:0')
+fps step: 5742 fps step and policy inference: 5382 fps total: 2138 epoch: 306/16384
+final success rate:  0.0
+fps step: 7356 fps step and policy inference: 6776 fps total: 2329 epoch: 307/16384
+lift success rate:  tensor(0.8203, device='cuda:0')
+fps step: 5539 fps step and policy inference: 5205 fps total: 2109 epoch: 308/16384
+final success rate:  0.0
+fps step: 7396 fps step and policy inference: 6808 fps total: 2333 epoch: 309/16384
+lift success rate:  tensor(0.9219, device='cuda:0')
+fps step: 5550 fps step and policy inference: 5213 fps total: 2114 epoch: 310/16384
+final success rate:  0.0
+fps step: 7579 fps step and policy inference: 6965 fps total: 2349 epoch: 311/16384
+lift success rate:  tensor(0.8672, device='cuda:0')
+fps step: 5363 fps step and policy inference: 5048 fps total: 2189 epoch: 312/16384
+final success rate:  0.0
+fps step: 7303 fps step and policy inference: 6579 fps total: 2448 epoch: 313/16384
+lift success rate:  tensor(0.7969, device='cuda:0')
+final success rate:  0.0
+fps step: 4947 fps step and policy inference: 4604 fps total: 2115 epoch: 314/16384
+lift success rate:  tensor(0.8438, device='cuda:0')
+fps step: 5725 fps step and policy inference: 5268 fps total: 2254 epoch: 315/16384
+final success rate:  0.0
+fps step: 6691 fps step and policy inference: 6079 fps total: 2373 epoch: 316/16384
+lift success rate:  tensor(0.8906, device='cuda:0')
+fps step: 5409 fps step and policy inference: 5002 fps total: 2184 epoch: 317/16384
+final success rate:  0.0
+fps step: 6617 fps step and policy inference: 6005 fps total: 2354 epoch: 318/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 5344 fps step and policy inference: 4947 fps total: 2191 epoch: 319/16384
+final success rate:  0.0
+fps step: 6823 fps step and policy inference: 6186 fps total: 2398 epoch: 320/16384
+saving next best rewards:  [-14.04]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 5254 fps step and policy inference: 4870 fps total: 2166 epoch: 321/16384
+final success rate:  0.0
+fps step: 7131 fps step and policy inference: 6439 fps total: 2441 epoch: 322/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 5076 fps step and policy inference: 4715 fps total: 2143 epoch: 323/16384
+final success rate:  0.0
+fps step: 6424 fps step and policy inference: 5846 fps total: 2348 epoch: 324/16384
+saving next best rewards:  [-13.7]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9297, device='cuda:0')
+final success rate:  0.0
+fps step: 4982 fps step and policy inference: 4636 fps total: 2089 epoch: 325/16384
+lift success rate:  tensor(0.9375, device='cuda:0')
+fps step: 5816 fps step and policy inference: 5344 fps total: 2231 epoch: 326/16384
+final success rate:  0.0
+fps step: 6598 fps step and policy inference: 6002 fps total: 2340 epoch: 327/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 5520 fps step and policy inference: 5097 fps total: 2192 epoch: 328/16384
+final success rate:  0.0
+fps step: 6719 fps step and policy inference: 6099 fps total: 2350 epoch: 329/16384
+lift success rate:  tensor(0.9219, device='cuda:0')
+fps step: 5269 fps step and policy inference: 4881 fps total: 2254 epoch: 330/16384
+final success rate:  0.0
+fps step: 7363 fps step and policy inference: 6784 fps total: 2605 epoch: 331/16384
+lift success rate:  tensor(0.9219, device='cuda:0')
+fps step: 5437 fps step and policy inference: 5112 fps total: 2310 epoch: 332/16384
+final success rate:  0.0
+fps step: 7572 fps step and policy inference: 6961 fps total: 2625 epoch: 333/16384
+lift success rate:  tensor(0.9062, device='cuda:0')
+fps step: 5407 fps step and policy inference: 5083 fps total: 2304 epoch: 334/16384
+final success rate:  0.0078125
+fps step: 7907 fps step and policy inference: 7240 fps total: 2666 epoch: 335/16384
+saving next best rewards:  [-13.28]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.8750, device='cuda:0')
+final success rate:  0.0
+fps step: 5335 fps step and policy inference: 5026 fps total: 2297 epoch: 336/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 6321 fps step and policy inference: 5889 fps total: 2462 epoch: 337/16384
+final success rate:  0.0
+fps step: 7101 fps step and policy inference: 6557 fps total: 2570 epoch: 338/16384
+saving next best rewards:  [-12.87]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.8594, device='cuda:0')
+fps step: 6034 fps step and policy inference: 5643 fps total: 2414 epoch: 339/16384
+final success rate:  0.0
+fps step: 7329 fps step and policy inference: 6754 fps total: 2599 epoch: 340/16384
+lift success rate:  tensor(0.9297, device='cuda:0')
+fps step: 5791 fps step and policy inference: 5424 fps total: 2369 epoch: 341/16384
+final success rate:  0.0
+fps step: 7358 fps step and policy inference: 6779 fps total: 2595 epoch: 342/16384
+lift success rate:  tensor(0.9141, device='cuda:0')
+fps step: 5625 fps step and policy inference: 5282 fps total: 2342 epoch: 343/16384
+final success rate:  0.0
+fps step: 7720 fps step and policy inference: 7085 fps total: 2642 epoch: 344/16384
+lift success rate:  tensor(0.9141, device='cuda:0')
+fps step: 5467 fps step and policy inference: 5140 fps total: 2322 epoch: 345/16384
+final success rate:  0.0
+fps step: 7852 fps step and policy inference: 7197 fps total: 2662 epoch: 346/16384
+lift success rate:  tensor(0.8828, device='cuda:0')
+final success rate:  0.0
+fps step: 5318 fps step and policy inference: 5008 fps total: 2291 epoch: 347/16384
+lift success rate:  tensor(0.8594, device='cuda:0')
+fps step: 6275 fps step and policy inference: 5848 fps total: 2453 epoch: 348/16384
+final success rate:  0.0
+fps step: 7141 fps step and policy inference: 6586 fps total: 2575 epoch: 349/16384
+lift success rate:  tensor(0.8750, device='cuda:0')
+fps step: 5789 fps step and policy inference: 5424 fps total: 2371 epoch: 350/16384
+final success rate:  0.0078125
+fps step: 7204 fps step and policy inference: 6648 fps total: 2581 epoch: 351/16384
+saving next best rewards:  [-12.15]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9297, device='cuda:0')
+fps step: 5552 fps step and policy inference: 5218 fps total: 2328 epoch: 352/16384
+final success rate:  0.0
+fps step: 7406 fps step and policy inference: 6819 fps total: 2602 epoch: 353/16384
+lift success rate:  tensor(0.8125, device='cuda:0')
+fps step: 5585 fps step and policy inference: 5243 fps total: 2333 epoch: 354/16384
+final success rate:  0.0078125
+fps step: 7772 fps step and policy inference: 7128 fps total: 2648 epoch: 355/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 5381 fps step and policy inference: 5065 fps total: 2303 epoch: 356/16384
+final success rate:  0.0
+fps step: 7886 fps step and policy inference: 7224 fps total: 2665 epoch: 357/16384
+lift success rate:  tensor(0.8906, device='cuda:0')
+final success rate:  0.0
+fps step: 5208 fps step and policy inference: 4910 fps total: 2269 epoch: 358/16384
+lift success rate:  tensor(0.7969, device='cuda:0')
+fps step: 6311 fps step and policy inference: 5881 fps total: 2455 epoch: 359/16384
+final success rate:  0.0
+fps step: 6962 fps step and policy inference: 6440 fps total: 2549 epoch: 360/16384
+lift success rate:  tensor(0.9062, device='cuda:0')
+fps step: 6120 fps step and policy inference: 5713 fps total: 2431 epoch: 361/16384
+final success rate:  0.0
+fps step: 7226 fps step and policy inference: 6667 fps total: 2592 epoch: 362/16384
+lift success rate:  tensor(0.8281, device='cuda:0')
+fps step: 5732 fps step and policy inference: 5374 fps total: 2369 epoch: 363/16384
+final success rate:  0.0
+fps step: 7512 fps step and policy inference: 6908 fps total: 2623 epoch: 364/16384
+lift success rate:  tensor(0.8672, device='cuda:0')
+fps step: 5579 fps step and policy inference: 5238 fps total: 2338 epoch: 365/16384
+final success rate:  0.0078125
+fps step: 7871 fps step and policy inference: 7211 fps total: 2665 epoch: 366/16384
+saving next best rewards:  [-11.73]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.8984, device='cuda:0')
+fps step: 5438 fps step and policy inference: 5115 fps total: 2302 epoch: 367/16384
+final success rate:  0.0
+fps step: 8147 fps step and policy inference: 7442 fps total: 2698 epoch: 368/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+final success rate:  0.0
+fps step: 5295 fps step and policy inference: 4984 fps total: 2277 epoch: 369/16384
+lift success rate:  tensor(0.9219, device='cuda:0')
+fps step: 6493 fps step and policy inference: 6035 fps total: 2485 epoch: 370/16384
+final success rate:  0.0078125
+fps step: 6882 fps step and policy inference: 6374 fps total: 2534 epoch: 371/16384
+saving next best rewards:  [-10.33]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 6232 fps step and policy inference: 5815 fps total: 2444 epoch: 372/16384
+final success rate:  0.015625
+fps step: 7192 fps step and policy inference: 6636 fps total: 2587 epoch: 373/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 5850 fps step and policy inference: 5479 fps total: 2380 epoch: 374/16384
+final success rate:  0.0078125
+fps step: 7437 fps step and policy inference: 6847 fps total: 2608 epoch: 375/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 5638 fps step and policy inference: 5292 fps total: 2338 epoch: 376/16384
+final success rate:  0.0
+fps step: 7900 fps step and policy inference: 7240 fps total: 2666 epoch: 377/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 5438 fps step and policy inference: 5115 fps total: 2314 epoch: 378/16384
+final success rate:  0.015625
+fps step: 8626 fps step and policy inference: 7841 fps total: 2746 epoch: 379/16384
+saving next best rewards:  [-10.22]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.8906, device='cuda:0')
+final success rate:  0.0
+fps step: 5211 fps step and policy inference: 4911 fps total: 2269 epoch: 380/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 6725 fps step and policy inference: 6236 fps total: 2481 epoch: 381/16384
+final success rate:  0.0078125
+fps step: 6837 fps step and policy inference: 6332 fps total: 2533 epoch: 382/16384
+saving next best rewards:  [-8.66]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9141, device='cuda:0')
+fps step: 6426 fps step and policy inference: 5983 fps total: 2471 epoch: 383/16384
+final success rate:  0.0078125
+fps step: 7325 fps step and policy inference: 6751 fps total: 2600 epoch: 384/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 6105 fps step and policy inference: 5701 fps total: 2425 epoch: 385/16384
+final success rate:  0.0
+fps step: 7713 fps step and policy inference: 7078 fps total: 2639 epoch: 386/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 5808 fps step and policy inference: 5442 fps total: 2375 epoch: 387/16384
+final success rate:  0.0078125
+fps step: 8053 fps step and policy inference: 7365 fps total: 2679 epoch: 388/16384
+lift success rate:  tensor(0.9219, device='cuda:0')
+fps step: 5632 fps step and policy inference: 5285 fps total: 2348 epoch: 389/16384
+final success rate:  0.0
+fps step: 8629 fps step and policy inference: 7844 fps total: 2741 epoch: 390/16384
+lift success rate:  tensor(0.8594, device='cuda:0')
+final success rate:  0.0
+fps step: 5490 fps step and policy inference: 5160 fps total: 2321 epoch: 391/16384
+lift success rate:  tensor(0.8125, device='cuda:0')
+fps step: 6956 fps step and policy inference: 6434 fps total: 2541 epoch: 392/16384
+final success rate:  0.0
+fps step: 7260 fps step and policy inference: 6691 fps total: 2588 epoch: 393/16384
+lift success rate:  tensor(0.7422, device='cuda:0')
+fps step: 6486 fps step and policy inference: 6031 fps total: 2485 epoch: 394/16384
+final success rate:  0.0
+fps step: 7668 fps step and policy inference: 7040 fps total: 2637 epoch: 395/16384
+lift success rate:  tensor(0.8906, device='cuda:0')
+fps step: 6228 fps step and policy inference: 5808 fps total: 2450 epoch: 396/16384
+final success rate:  0.0
+fps step: 7623 fps step and policy inference: 6997 fps total: 2906 epoch: 397/16384
+lift success rate:  tensor(0.8203, device='cuda:0')
+fps step: 5961 fps step and policy inference: 5573 fps total: 2399 epoch: 398/16384
+final success rate:  0.0
+fps step: 8198 fps step and policy inference: 7487 fps total: 2700 epoch: 399/16384
+lift success rate:  tensor(0.9297, device='cuda:0')
+fps step: 5710 fps step and policy inference: 5352 fps total: 2356 epoch: 400/16384
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion_ep_400_rew_-13.948648.pth'
+final success rate:  0.0078125
+fps step: 8774 fps step and policy inference: 7965 fps total: 2743 epoch: 401/16384
+lift success rate:  tensor(0.9297, device='cuda:0')
+final success rate:  0.0078125
+fps step: 5370 fps step and policy inference: 5054 fps total: 2297 epoch: 402/16384
+saving next best rewards:  [-7.32]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 6973 fps step and policy inference: 6455 fps total: 2548 epoch: 403/16384
+final success rate:  0.0
+fps step: 7197 fps step and policy inference: 6640 fps total: 2584 epoch: 404/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 6700 fps step and policy inference: 6217 fps total: 2513 epoch: 405/16384
+final success rate:  0.0
+fps step: 7282 fps step and policy inference: 6711 fps total: 2594 epoch: 406/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 6163 fps step and policy inference: 5751 fps total: 2430 epoch: 407/16384
+final success rate:  0.0078125
+fps step: 7699 fps step and policy inference: 7065 fps total: 2637 epoch: 408/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 5930 fps step and policy inference: 5544 fps total: 2399 epoch: 409/16384
+final success rate:  0.0
+fps step: 8254 fps step and policy inference: 7534 fps total: 2705 epoch: 410/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 5640 fps step and policy inference: 5286 fps total: 2343 epoch: 411/16384
+final success rate:  0.0078125
+fps step: 8695 fps step and policy inference: 7895 fps total: 2754 epoch: 412/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+final success rate:  0.0078125
+fps step: 5343 fps step and policy inference: 5030 fps total: 2294 epoch: 413/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 6869 fps step and policy inference: 6362 fps total: 2539 epoch: 414/16384
+final success rate:  0.0
+fps step: 7050 fps step and policy inference: 6507 fps total: 2555 epoch: 415/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 6580 fps step and policy inference: 6113 fps total: 2495 epoch: 416/16384
+final success rate:  0.0
+fps step: 7372 fps step and policy inference: 6790 fps total: 2603 epoch: 417/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 6325 fps step and policy inference: 5889 fps total: 2447 epoch: 418/16384
+final success rate:  0.0078125
+fps step: 7721 fps step and policy inference: 7080 fps total: 2646 epoch: 419/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 5953 fps step and policy inference: 5569 fps total: 2399 epoch: 420/16384
+final success rate:  0.0078125
+fps step: 8177 fps step and policy inference: 7466 fps total: 2697 epoch: 421/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 5648 fps step and policy inference: 5299 fps total: 2346 epoch: 422/16384
+final success rate:  0.0
+fps step: 9033 fps step and policy inference: 8174 fps total: 2773 epoch: 423/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+final success rate:  0.0
+fps step: 5577 fps step and policy inference: 5234 fps total: 2333 epoch: 424/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 7128 fps step and policy inference: 6579 fps total: 2573 epoch: 425/16384
+final success rate:  0.0
+fps step: 6938 fps step and policy inference: 6421 fps total: 2546 epoch: 426/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 6761 fps step and policy inference: 6270 fps total: 2522 epoch: 427/16384
+final success rate:  0.0
+fps step: 7233 fps step and policy inference: 6673 fps total: 2583 epoch: 428/16384
+lift success rate:  tensor(0.9219, device='cuda:0')
+fps step: 6291 fps step and policy inference: 5863 fps total: 2455 epoch: 429/16384
+final success rate:  0.0
+fps step: 7681 fps step and policy inference: 7054 fps total: 2642 epoch: 430/16384
+lift success rate:  tensor(0.9141, device='cuda:0')
+fps step: 5869 fps step and policy inference: 5493 fps total: 2388 epoch: 431/16384
+final success rate:  0.015625
+fps step: 8384 fps step and policy inference: 7643 fps total: 2719 epoch: 432/16384
+saving next best rewards:  [-5.18]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 5645 fps step and policy inference: 5295 fps total: 2354 epoch: 433/16384
+final success rate:  0.0
+fps step: 9213 fps step and policy inference: 8322 fps total: 2799 epoch: 434/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+final success rate:  0.0
+fps step: 5277 fps step and policy inference: 4970 fps total: 2281 epoch: 435/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 7298 fps step and policy inference: 6730 fps total: 2577 epoch: 436/16384
+final success rate:  0.0078125
+fps step: 6969 fps step and policy inference: 6447 fps total: 2551 epoch: 437/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 6836 fps step and policy inference: 6333 fps total: 2524 epoch: 438/16384
+final success rate:  0.0
+fps step: 7237 fps step and policy inference: 6674 fps total: 2583 epoch: 439/16384
+lift success rate:  tensor(0.9297, device='cuda:0')
+fps step: 6397 fps step and policy inference: 5954 fps total: 2469 epoch: 440/16384
+final success rate:  0.0078125
+fps step: 7678 fps step and policy inference: 7044 fps total: 2644 epoch: 441/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 5855 fps step and policy inference: 5472 fps total: 2386 epoch: 442/16384
+final success rate:  0.0
+fps step: 8356 fps step and policy inference: 7609 fps total: 2723 epoch: 443/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 5666 fps step and policy inference: 5316 fps total: 2349 epoch: 444/16384
+final success rate:  0.015625
+fps step: 9249 fps step and policy inference: 8344 fps total: 2796 epoch: 445/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+final success rate:  0.0078125
+fps step: 5360 fps step and policy inference: 5044 fps total: 2295 epoch: 446/16384
+lift success rate:  tensor(0.9219, device='cuda:0')
+fps step: 7282 fps step and policy inference: 6713 fps total: 2594 epoch: 447/16384
+final success rate:  0.0234375
+fps step: 6959 fps step and policy inference: 6434 fps total: 2544 epoch: 448/16384
+saving next best rewards:  [-5.16]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 6983 fps step and policy inference: 6463 fps total: 2556 epoch: 449/16384
+final success rate:  0.015625
+fps step: 7269 fps step and policy inference: 6702 fps total: 2590 epoch: 450/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 6550 fps step and policy inference: 6085 fps total: 2494 epoch: 451/16384
+final success rate:  0.0
+fps step: 7732 fps step and policy inference: 7094 fps total: 2644 epoch: 452/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 6128 fps step and policy inference: 5721 fps total: 2421 epoch: 453/16384
+final success rate:  0.015625
+fps step: 8517 fps step and policy inference: 7746 fps total: 2729 epoch: 454/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 5702 fps step and policy inference: 5346 fps total: 2355 epoch: 455/16384
+final success rate:  0.03125
+fps step: 9342 fps step and policy inference: 8428 fps total: 2817 epoch: 456/16384
+saving next best rewards:  [-5.1]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9375, device='cuda:0')
+final success rate:  0.015625
+fps step: 5392 fps step and policy inference: 5076 fps total: 2308 epoch: 457/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 7572 fps step and policy inference: 6961 fps total: 2623 epoch: 458/16384
+final success rate:  0.0
+fps step: 6907 fps step and policy inference: 6392 fps total: 2540 epoch: 459/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 7416 fps step and policy inference: 6828 fps total: 2604 epoch: 460/16384
+final success rate:  0.03125
+fps step: 7119 fps step and policy inference: 6575 fps total: 2577 epoch: 461/16384
+saving next best rewards:  [-1.85]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6826 fps step and policy inference: 6326 fps total: 2539 epoch: 462/16384
+final success rate:  0.0234375
+fps step: 7765 fps step and policy inference: 7111 fps total: 2648 epoch: 463/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6256 fps step and policy inference: 5832 fps total: 2442 epoch: 464/16384
+final success rate:  0.0390625
+fps step: 7869 fps step and policy inference: 7031 fps total: 2471 epoch: 465/16384
+saving next best rewards:  [3.54]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 5369 fps step and policy inference: 4968 fps total: 2148 epoch: 466/16384
+final success rate:  0.0
+fps step: 8655 fps step and policy inference: 7650 fps total: 2542 epoch: 467/16384
+lift success rate:  tensor(1., device='cuda:0')
+final success rate:  0.046875
+fps step: 5010 fps step and policy inference: 4658 fps total: 2092 epoch: 468/16384
+saving next best rewards:  [6.07]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 7038 fps step and policy inference: 6369 fps total: 2381 epoch: 469/16384
+final success rate:  0.03125
+fps step: 6396 fps step and policy inference: 5835 fps total: 2299 epoch: 470/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6635 fps step and policy inference: 6032 fps total: 2327 epoch: 471/16384
+final success rate:  0.03125
+fps step: 6712 fps step and policy inference: 6095 fps total: 2340 epoch: 472/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 6055 fps step and policy inference: 5549 fps total: 2253 epoch: 473/16384
+final success rate:  0.015625
+fps step: 7065 fps step and policy inference: 6385 fps total: 2376 epoch: 474/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 5721 fps step and policy inference: 5268 fps total: 2209 epoch: 475/16384
+final success rate:  0.0078125
+fps step: 7758 fps step and policy inference: 6945 fps total: 2458 epoch: 476/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 5356 fps step and policy inference: 4955 fps total: 2151 epoch: 477/16384
+final success rate:  0.0234375
+fps step: 8565 fps step and policy inference: 7589 fps total: 2531 epoch: 478/16384
+lift success rate:  tensor(1., device='cuda:0')
+final success rate:  0.03125
+fps step: 5118 fps step and policy inference: 4749 fps total: 2115 epoch: 479/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 6865 fps step and policy inference: 6221 fps total: 2350 epoch: 480/16384
+final success rate:  0.0546875
+fps step: 6238 fps step and policy inference: 5699 fps total: 2283 epoch: 481/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 6533 fps step and policy inference: 5945 fps total: 2312 epoch: 482/16384
+final success rate:  0.03125
+fps step: 6575 fps step and policy inference: 5981 fps total: 2319 epoch: 483/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6282 fps step and policy inference: 5740 fps total: 2293 epoch: 484/16384
+final success rate:  0.03125
+fps step: 7245 fps step and policy inference: 6533 fps total: 2408 epoch: 485/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 5716 fps step and policy inference: 5263 fps total: 2206 epoch: 486/16384
+final success rate:  0.03125
+fps step: 7773 fps step and policy inference: 6956 fps total: 2453 epoch: 487/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 5258 fps step and policy inference: 4873 fps total: 2133 epoch: 488/16384
+final success rate:  0.0703125
+fps step: 8591 fps step and policy inference: 7594 fps total: 2524 epoch: 489/16384
+saving next best rewards:  [6.4]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(1., device='cuda:0')
+final success rate:  0.046875
+fps step: 5131 fps step and policy inference: 4762 fps total: 2113 epoch: 490/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6949 fps step and policy inference: 6291 fps total: 2367 epoch: 491/16384
+final success rate:  0.1015625
+fps step: 6211 fps step and policy inference: 5670 fps total: 2273 epoch: 492/16384
+saving next best rewards:  [13.01]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6609 fps step and policy inference: 6013 fps total: 2323 epoch: 493/16384
+final success rate:  0.03125
+fps step: 6589 fps step and policy inference: 5993 fps total: 2332 epoch: 494/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6125 fps step and policy inference: 5603 fps total: 2268 epoch: 495/16384
+final success rate:  0.0625
+fps step: 7092 fps step and policy inference: 6407 fps total: 2393 epoch: 496/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 5358 fps step and policy inference: 4917 fps total: 2134 epoch: 497/16384
+final success rate:  0.0234375
+fps step: 7812 fps step and policy inference: 6982 fps total: 2460 epoch: 498/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 5237 fps step and policy inference: 4852 fps total: 2133 epoch: 499/16384
+final success rate:  0.0546875
+fps step: 8224 fps step and policy inference: 7317 fps total: 2511 epoch: 500/16384
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion_ep_500_rew_4.173159.pth'
+lift success rate:  tensor(1., device='cuda:0')
+final success rate:  0.0234375
+fps step: 4671 fps step and policy inference: 4350 fps total: 2058 epoch: 501/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 4814 fps step and policy inference: 4342 fps total: 2042 epoch: 502/16384
+final success rate:  0.015625
+fps step: 4088 fps step and policy inference: 3645 fps total: 1873 epoch: 503/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 4454 fps step and policy inference: 3991 fps total: 1961 epoch: 504/16384
+final success rate:  0.0390625
+fps step: 3993 fps step and policy inference: 3508 fps total: 1832 epoch: 505/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 6044 fps step and policy inference: 5539 fps total: 2253 epoch: 506/16384
+final success rate:  0.0546875
+fps step: 7103 fps step and policy inference: 6412 fps total: 2369 epoch: 507/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 5471 fps step and policy inference: 5028 fps total: 2067 epoch: 508/16384
+final success rate:  0.0703125
+fps step: 7750 fps step and policy inference: 6940 fps total: 2446 epoch: 509/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 5267 fps step and policy inference: 4880 fps total: 2144 epoch: 510/16384
+final success rate:  0.015625
+fps step: 9347 fps step and policy inference: 8428 fps total: 2801 epoch: 511/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+final success rate:  0.0390625
+fps step: 5212 fps step and policy inference: 4912 fps total: 2266 epoch: 512/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 7498 fps step and policy inference: 6896 fps total: 2616 epoch: 513/16384
+final success rate:  0.0703125
+fps step: 6559 fps step and policy inference: 6092 fps total: 2487 epoch: 514/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 7033 fps step and policy inference: 6496 fps total: 2567 epoch: 515/16384
+final success rate:  0.0546875
+fps step: 6933 fps step and policy inference: 6413 fps total: 2533 epoch: 516/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6466 fps step and policy inference: 6012 fps total: 2453 epoch: 517/16384
+final success rate:  0.0859375
+fps step: 7521 fps step and policy inference: 6911 fps total: 2608 epoch: 518/16384
+saving next best rewards:  [14.61]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9219, device='cuda:0')
+fps step: 5882 fps step and policy inference: 5506 fps total: 2384 epoch: 519/16384
+final success rate:  0.0390625
+fps step: 8342 fps step and policy inference: 7599 fps total: 2699 epoch: 520/16384
+lift success rate:  tensor(0.8984, device='cuda:0')
+fps step: 5503 fps step and policy inference: 5169 fps total: 2309 epoch: 521/16384
+final success rate:  0.046875
+fps step: 9170 fps step and policy inference: 8282 fps total: 2781 epoch: 522/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+final success rate:  0.09375
+fps step: 5130 fps step and policy inference: 4840 fps total: 2237 epoch: 523/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 7266 fps step and policy inference: 6698 fps total: 2578 epoch: 524/16384
+final success rate:  0.0234375
+fps step: 6730 fps step and policy inference: 6240 fps total: 2511 epoch: 525/16384
+lift success rate:  tensor(0.8750, device='cuda:0')
+fps step: 6891 fps step and policy inference: 6378 fps total: 2524 epoch: 526/16384
+final success rate:  0.0703125
+fps step: 7137 fps step and policy inference: 6585 fps total: 2570 epoch: 527/16384
+lift success rate:  tensor(0.8750, device='cuda:0')
+fps step: 6337 fps step and policy inference: 5900 fps total: 2456 epoch: 528/16384
+final success rate:  0.0546875
+fps step: 7805 fps step and policy inference: 7150 fps total: 2653 epoch: 529/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 5972 fps step and policy inference: 5581 fps total: 2396 epoch: 530/16384
+final success rate:  0.0703125
+fps step: 8400 fps step and policy inference: 7650 fps total: 2714 epoch: 531/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 5634 fps step and policy inference: 5282 fps total: 2334 epoch: 532/16384
+final success rate:  0.1328125
+fps step: 9209 fps step and policy inference: 8314 fps total: 2782 epoch: 533/16384
+saving next best rewards:  [26.83]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9922, device='cuda:0')
+final success rate:  0.1171875
+fps step: 5218 fps step and policy inference: 4919 fps total: 2259 epoch: 534/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 7335 fps step and policy inference: 6754 fps total: 2598 epoch: 535/16384
+final success rate:  0.125
+fps step: 6765 fps step and policy inference: 6269 fps total: 2515 epoch: 536/16384
+lift success rate:  tensor(0.9297, device='cuda:0')
+fps step: 6935 fps step and policy inference: 6415 fps total: 2538 epoch: 537/16384
+final success rate:  0.1328125
+fps step: 7224 fps step and policy inference: 6658 fps total: 2577 epoch: 538/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 6403 fps step and policy inference: 5953 fps total: 2467 epoch: 539/16384
+final success rate:  0.1640625
+fps step: 7674 fps step and policy inference: 7042 fps total: 2987 epoch: 540/16384
+saving next best rewards:  [31.35]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 5925 fps step and policy inference: 5543 fps total: 3937 epoch: 541/16384
+final success rate:  0.1015625
+fps step: 8491 fps step and policy inference: 7722 fps total: 4933 epoch: 542/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 5666 fps step and policy inference: 5312 fps total: 3820 epoch: 543/16384
+final success rate:  0.1015625
+fps step: 9615 fps step and policy inference: 8633 fps total: 5289 epoch: 544/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+final success rate:  0.0625
+fps step: 5332 fps step and policy inference: 5014 fps total: 3669 epoch: 545/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 7577 fps step and policy inference: 6956 fps total: 4604 epoch: 546/16384
+final success rate:  0.125
+fps step: 6857 fps step and policy inference: 6345 fps total: 4331 epoch: 547/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 7208 fps step and policy inference: 6648 fps total: 4473 epoch: 548/16384
+final success rate:  0.171875
+fps step: 7281 fps step and policy inference: 6709 fps total: 4500 epoch: 549/16384
+saving next best rewards:  [33.5]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9375, device='cuda:0')
+fps step: 6596 fps step and policy inference: 6125 fps total: 4225 epoch: 550/16384
+final success rate:  0.1328125
+fps step: 7896 fps step and policy inference: 7226 fps total: 4727 epoch: 551/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 6088 fps step and policy inference: 5678 fps total: 4014 epoch: 552/16384
+final success rate:  0.1171875
+fps step: 8646 fps step and policy inference: 7850 fps total: 4985 epoch: 553/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 5714 fps step and policy inference: 5355 fps total: 3844 epoch: 554/16384
+final success rate:  0.1015625
+fps step: 9471 fps step and policy inference: 8522 fps total: 5245 epoch: 555/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+final success rate:  0.1328125
+fps step: 5341 fps step and policy inference: 5025 fps total: 3669 epoch: 556/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 7454 fps step and policy inference: 6856 fps total: 4563 epoch: 557/16384
+final success rate:  0.125
+fps step: 6847 fps step and policy inference: 6335 fps total: 3296 epoch: 558/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 6711 fps step and policy inference: 6108 fps total: 2241 epoch: 559/16384
+final success rate:  0.109375
+fps step: 7107 fps step and policy inference: 6558 fps total: 2299 epoch: 560/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6394 fps step and policy inference: 5942 fps total: 2227 epoch: 561/16384
+final success rate:  0.171875
+fps step: 7652 fps step and policy inference: 7020 fps total: 2356 epoch: 562/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 5929 fps step and policy inference: 5544 fps total: 2152 epoch: 563/16384
+final success rate:  0.109375
+fps step: 8146 fps step and policy inference: 7432 fps total: 2393 epoch: 564/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 5618 fps step and policy inference: 5270 fps total: 2118 epoch: 565/16384
+final success rate:  0.0546875
+fps step: 9360 fps step and policy inference: 8432 fps total: 2491 epoch: 566/16384
+lift success rate:  tensor(1., device='cuda:0')
+final success rate:  0.140625
+fps step: 5230 fps step and policy inference: 4926 fps total: 2057 epoch: 567/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 7269 fps step and policy inference: 6697 fps total: 2313 epoch: 568/16384
+final success rate:  0.1953125
+fps step: 6699 fps step and policy inference: 6210 fps total: 2250 epoch: 569/16384
+saving next best rewards:  [38.2]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 6922 fps step and policy inference: 6405 fps total: 2280 epoch: 570/16384
+final success rate:  0.2265625
+fps step: 6974 fps step and policy inference: 6442 fps total: 2289 epoch: 571/16384
+saving next best rewards:  [43.05]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6472 fps step and policy inference: 6015 fps total: 2224 epoch: 572/16384
+final success rate:  0.1875
+fps step: 7556 fps step and policy inference: 6940 fps total: 2347 epoch: 573/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6119 fps step and policy inference: 5707 fps total: 2181 epoch: 574/16384
+final success rate:  0.2265625
+fps step: 8190 fps step and policy inference: 7470 fps total: 2396 epoch: 575/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 5762 fps step and policy inference: 5396 fps total: 2141 epoch: 576/16384
+final success rate:  0.1953125
+fps step: 9253 fps step and policy inference: 8347 fps total: 2489 epoch: 577/16384
+lift success rate:  tensor(1., device='cuda:0')
+final success rate:  0.2421875
+fps step: 5303 fps step and policy inference: 4989 fps total: 2067 epoch: 578/16384
+saving next best rewards:  [45.57]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 7302 fps step and policy inference: 6730 fps total: 2320 epoch: 579/16384
+final success rate:  0.2265625
+fps step: 6631 fps step and policy inference: 6153 fps total: 2246 epoch: 580/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 6917 fps step and policy inference: 6396 fps total: 2285 epoch: 581/16384
+final success rate:  0.28125
+fps step: 7002 fps step and policy inference: 6467 fps total: 2285 epoch: 582/16384
+saving next best rewards:  [64.06]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 6390 fps step and policy inference: 5946 fps total: 2218 epoch: 583/16384
+final success rate:  0.1640625
+fps step: 7696 fps step and policy inference: 7058 fps total: 2353 epoch: 584/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 5966 fps step and policy inference: 5575 fps total: 2169 epoch: 585/16384
+final success rate:  0.1875
+fps step: 8338 fps step and policy inference: 7592 fps total: 2419 epoch: 586/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 5558 fps step and policy inference: 5216 fps total: 2106 epoch: 587/16384
+final success rate:  0.3046875
+fps step: 9132 fps step and policy inference: 8244 fps total: 2476 epoch: 588/16384
+saving next best rewards:  [65.26]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9844, device='cuda:0')
+final success rate:  0.1875
+fps step: 5103 fps step and policy inference: 4816 fps total: 2039 epoch: 589/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 7281 fps step and policy inference: 6677 fps total: 2420 epoch: 590/16384
+final success rate:  0.21875
+fps step: 6249 fps step and policy inference: 5711 fps total: 2285 epoch: 591/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 6379 fps step and policy inference: 5821 fps total: 2304 epoch: 592/16384
+final success rate:  0.21875
+fps step: 6674 fps step and policy inference: 6065 fps total: 2339 epoch: 593/16384
+lift success rate:  tensor(0.7188, device='cuda:0')
+fps step: 5981 fps step and policy inference: 5485 fps total: 2160 epoch: 594/16384
+final success rate:  0.15625
+fps step: 7873 fps step and policy inference: 7210 fps total: 2378 epoch: 595/16384
+lift success rate:  tensor(0.8594, device='cuda:0')
+fps step: 5928 fps step and policy inference: 5544 fps total: 2163 epoch: 596/16384
+final success rate:  0.2421875
+fps step: 8338 fps step and policy inference: 7598 fps total: 2418 epoch: 597/16384
+lift success rate:  tensor(0.8594, device='cuda:0')
+fps step: 5627 fps step and policy inference: 5274 fps total: 2117 epoch: 598/16384
+final success rate:  0.234375
+fps step: 9232 fps step and policy inference: 8335 fps total: 2492 epoch: 599/16384
+lift success rate:  tensor(0.9375, device='cuda:0')
+final success rate:  0.2421875
+fps step: 5278 fps step and policy inference: 4972 fps total: 2069 epoch: 600/16384
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion_ep_600_rew_50.89891.pth'
+lift success rate:  tensor(0.8750, device='cuda:0')
+fps step: 7227 fps step and policy inference: 6668 fps total: 2323 epoch: 601/16384
+final success rate:  0.21875
+fps step: 6744 fps step and policy inference: 6253 fps total: 2264 epoch: 602/16384
+lift success rate:  tensor(0.8438, device='cuda:0')
+fps step: 6753 fps step and policy inference: 6261 fps total: 2270 epoch: 603/16384
+final success rate:  0.203125
+fps step: 7254 fps step and policy inference: 6686 fps total: 2317 epoch: 604/16384
+lift success rate:  tensor(0.8906, device='cuda:0')
+fps step: 6212 fps step and policy inference: 5793 fps total: 2196 epoch: 605/16384
+final success rate:  0.328125
+fps step: 7719 fps step and policy inference: 7080 fps total: 2369 epoch: 606/16384
+saving next best rewards:  [81.33]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.8281, device='cuda:0')
+fps step: 5855 fps step and policy inference: 5483 fps total: 2153 epoch: 607/16384
+final success rate:  0.1796875
+fps step: 8443 fps step and policy inference: 7686 fps total: 2428 epoch: 608/16384
+lift success rate:  tensor(0.8438, device='cuda:0')
+fps step: 5571 fps step and policy inference: 5231 fps total: 2114 epoch: 609/16384
+final success rate:  0.25
+fps step: 9131 fps step and policy inference: 8245 fps total: 2484 epoch: 610/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+final success rate:  0.2734375
+fps step: 5182 fps step and policy inference: 4882 fps total: 2054 epoch: 611/16384
+lift success rate:  tensor(0.9375, device='cuda:0')
+fps step: 7163 fps step and policy inference: 6611 fps total: 2313 epoch: 612/16384
+final success rate:  0.2578125
+fps step: 6673 fps step and policy inference: 6191 fps total: 2251 epoch: 613/16384
+lift success rate:  tensor(0.8984, device='cuda:0')
+fps step: 6729 fps step and policy inference: 6235 fps total: 2261 epoch: 614/16384
+final success rate:  0.3359375
+fps step: 7181 fps step and policy inference: 6626 fps total: 2315 epoch: 615/16384
+saving next best rewards:  [83.9]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 6058 fps step and policy inference: 5650 fps total: 2178 epoch: 616/16384
+final success rate:  0.3515625
+fps step: 7630 fps step and policy inference: 7006 fps total: 2358 epoch: 617/16384
+saving next best rewards:  [84.71]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 5780 fps step and policy inference: 5418 fps total: 2147 epoch: 618/16384
+final success rate:  0.2890625
+fps step: 8348 fps step and policy inference: 7609 fps total: 2418 epoch: 619/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 5479 fps step and policy inference: 5146 fps total: 2102 epoch: 620/16384
+final success rate:  0.296875
+fps step: 9180 fps step and policy inference: 8292 fps total: 2482 epoch: 621/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+final success rate:  0.484375
+fps step: 5198 fps step and policy inference: 4898 fps total: 2057 epoch: 622/16384
+saving next best rewards:  [136.88]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 7189 fps step and policy inference: 6633 fps total: 2552 epoch: 623/16384
+final success rate:  0.40625
+fps step: 6676 fps step and policy inference: 6193 fps total: 2507 epoch: 624/16384
+lift success rate:  tensor(0.9141, device='cuda:0')
+fps step: 6847 fps step and policy inference: 6343 fps total: 2534 epoch: 625/16384
+final success rate:  0.4140625
+fps step: 7142 fps step and policy inference: 6595 fps total: 2572 epoch: 626/16384
+lift success rate:  tensor(0.8672, device='cuda:0')
+fps step: 6317 fps step and policy inference: 5886 fps total: 2458 epoch: 627/16384
+final success rate:  0.3203125
+fps step: 7808 fps step and policy inference: 7161 fps total: 2650 epoch: 628/16384
+lift success rate:  tensor(0.9219, device='cuda:0')
+fps step: 5947 fps step and policy inference: 5563 fps total: 2401 epoch: 629/16384
+final success rate:  0.359375
+fps step: 8511 fps step and policy inference: 7747 fps total: 2728 epoch: 630/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 5511 fps step and policy inference: 5174 fps total: 2324 epoch: 631/16384
+final success rate:  0.5
+fps step: 9485 fps step and policy inference: 8548 fps total: 2825 epoch: 632/16384
+saving next best rewards:  [142.77]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9844, device='cuda:0')
+final success rate:  0.3984375
+fps step: 5199 fps step and policy inference: 4904 fps total: 2262 epoch: 633/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 7431 fps step and policy inference: 6843 fps total: 2610 epoch: 634/16384
+final success rate:  0.40625
+fps step: 6702 fps step and policy inference: 6219 fps total: 2513 epoch: 635/16384
+lift success rate:  tensor(0.8125, device='cuda:0')
+fps step: 7046 fps step and policy inference: 6513 fps total: 2560 epoch: 636/16384
+final success rate:  0.2265625
+fps step: 7343 fps step and policy inference: 6766 fps total: 2600 epoch: 637/16384
+lift success rate:  tensor(0.8359, device='cuda:0')
+fps step: 6440 fps step and policy inference: 5994 fps total: 2478 epoch: 638/16384
+final success rate:  0.3203125
+fps step: 7860 fps step and policy inference: 7204 fps total: 2661 epoch: 639/16384
+lift success rate:  tensor(0.6484, device='cuda:0')
+fps step: 6060 fps step and policy inference: 5662 fps total: 2415 epoch: 640/16384
+final success rate:  0.1484375
+fps step: 8700 fps step and policy inference: 7902 fps total: 2753 epoch: 641/16384
+lift success rate:  tensor(0.7891, device='cuda:0')
+fps step: 5664 fps step and policy inference: 5312 fps total: 2349 epoch: 642/16384
+final success rate:  0.25
+fps step: 9655 fps step and policy inference: 8682 fps total: 2837 epoch: 643/16384
+lift success rate:  tensor(0.7812, device='cuda:0')
+final success rate:  0.21875
+fps step: 5352 fps step and policy inference: 5036 fps total: 2294 epoch: 644/16384
+lift success rate:  tensor(0.9062, device='cuda:0')
+fps step: 7484 fps step and policy inference: 6884 fps total: 2616 epoch: 645/16384
+final success rate:  0.3203125
+fps step: 6819 fps step and policy inference: 6319 fps total: 2528 epoch: 646/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 7019 fps step and policy inference: 6491 fps total: 2555 epoch: 647/16384
+final success rate:  0.3125
+fps step: 7123 fps step and policy inference: 6579 fps total: 2579 epoch: 648/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 6493 fps step and policy inference: 6037 fps total: 2487 epoch: 649/16384
+final success rate:  0.3828125
+fps step: 7703 fps step and policy inference: 7071 fps total: 2631 epoch: 650/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 5996 fps step and policy inference: 5606 fps total: 2406 epoch: 651/16384
+final success rate:  0.3828125
+fps step: 8444 fps step and policy inference: 7692 fps total: 2723 epoch: 652/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 5608 fps step and policy inference: 5266 fps total: 2344 epoch: 653/16384
+final success rate:  0.3984375
+fps step: 9437 fps step and policy inference: 8505 fps total: 2824 epoch: 654/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+final success rate:  0.3515625
+fps step: 5232 fps step and policy inference: 4931 fps total: 2270 epoch: 655/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 7461 fps step and policy inference: 6868 fps total: 2613 epoch: 656/16384
+final success rate:  0.375
+fps step: 6632 fps step and policy inference: 6158 fps total: 2501 epoch: 657/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 7005 fps step and policy inference: 6480 fps total: 2553 epoch: 658/16384
+final success rate:  0.3125
+fps step: 7125 fps step and policy inference: 6581 fps total: 2567 epoch: 659/16384
+lift success rate:  tensor(0.9219, device='cuda:0')
+fps step: 6438 fps step and policy inference: 5989 fps total: 2473 epoch: 660/16384
+final success rate:  0.2734375
+fps step: 7840 fps step and policy inference: 7182 fps total: 2653 epoch: 661/16384
+lift success rate:  tensor(0.8594, device='cuda:0')
+fps step: 5926 fps step and policy inference: 5541 fps total: 2384 epoch: 662/16384
+final success rate:  0.1953125
+fps step: 8557 fps step and policy inference: 7776 fps total: 2726 epoch: 663/16384
+lift success rate:  tensor(0.7656, device='cuda:0')
+fps step: 5672 fps step and policy inference: 5313 fps total: 2347 epoch: 664/16384
+final success rate:  0.2421875
+fps step: 9538 fps step and policy inference: 8577 fps total: 2825 epoch: 665/16384
+lift success rate:  tensor(0.8281, device='cuda:0')
+final success rate:  0.265625
+fps step: 5341 fps step and policy inference: 5023 fps total: 2283 epoch: 666/16384
+lift success rate:  tensor(0.8828, device='cuda:0')
+fps step: 7482 fps step and policy inference: 6877 fps total: 2599 epoch: 667/16384
+final success rate:  0.34375
+fps step: 6673 fps step and policy inference: 6183 fps total: 2493 epoch: 668/16384
+lift success rate:  tensor(0.9141, device='cuda:0')
+fps step: 6942 fps step and policy inference: 6413 fps total: 2528 epoch: 669/16384
+final success rate:  0.3046875
+fps step: 7131 fps step and policy inference: 6579 fps total: 2553 epoch: 670/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 6424 fps step and policy inference: 5972 fps total: 2459 epoch: 671/16384
+final success rate:  0.34375
+fps step: 7819 fps step and policy inference: 7154 fps total: 2648 epoch: 672/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 5886 fps step and policy inference: 5505 fps total: 2382 epoch: 673/16384
+final success rate:  0.390625
+fps step: 8383 fps step and policy inference: 7632 fps total: 2603 epoch: 674/16384
+lift success rate:  tensor(0.8750, device='cuda:0')
+fps step: 5259 fps step and policy inference: 4873 fps total: 2151 epoch: 675/16384
+final success rate:  0.296875
+fps step: 8377 fps step and policy inference: 7241 fps total: 2504 epoch: 676/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+final success rate:  0.40625
+fps step: 4919 fps step and policy inference: 4579 fps total: 2090 epoch: 677/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 6746 fps step and policy inference: 6125 fps total: 2359 epoch: 678/16384
+final success rate:  0.4765625
+fps step: 6211 fps step and policy inference: 5660 fps total: 2294 epoch: 679/16384
+lift success rate:  tensor(0.8672, device='cuda:0')
+fps step: 6449 fps step and policy inference: 5878 fps total: 2320 epoch: 680/16384
+final success rate:  0.2421875
+fps step: 6702 fps step and policy inference: 6086 fps total: 2355 epoch: 681/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 6020 fps step and policy inference: 5521 fps total: 2256 epoch: 682/16384
+final success rate:  0.3984375
+fps step: 7077 fps step and policy inference: 6396 fps total: 2404 epoch: 683/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 5523 fps step and policy inference: 5098 fps total: 2186 epoch: 684/16384
+final success rate:  0.421875
+fps step: 7690 fps step and policy inference: 6891 fps total: 2387 epoch: 685/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 5240 fps step and policy inference: 4855 fps total: 2139 epoch: 686/16384
+final success rate:  0.5859375
+fps step: 8585 fps step and policy inference: 7600 fps total: 2554 epoch: 687/16384
+saving next best rewards:  [168.88]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(1., device='cuda:0')
+final success rate:  0.4765625
+fps step: 4951 fps step and policy inference: 4610 fps total: 2091 epoch: 688/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6833 fps step and policy inference: 6191 fps total: 2374 epoch: 689/16384
+final success rate:  0.546875
+fps step: 6133 fps step and policy inference: 5614 fps total: 2277 epoch: 690/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 6381 fps step and policy inference: 5821 fps total: 2317 epoch: 691/16384
+final success rate:  0.4453125
+fps step: 6567 fps step and policy inference: 5975 fps total: 2325 epoch: 692/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 5909 fps step and policy inference: 5426 fps total: 2244 epoch: 693/16384
+final success rate:  0.453125
+fps step: 7141 fps step and policy inference: 6446 fps total: 2404 epoch: 694/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 5552 fps step and policy inference: 5121 fps total: 2196 epoch: 695/16384
+final success rate:  0.5859375
+fps step: 7673 fps step and policy inference: 6874 fps total: 2468 epoch: 696/16384
+saving next best rewards:  [176.93]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 5202 fps step and policy inference: 4825 fps total: 2136 epoch: 697/16384
+final success rate:  0.5859375
+fps step: 8398 fps step and policy inference: 7456 fps total: 2527 epoch: 698/16384
+saving next best rewards:  [178.08]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9766, device='cuda:0')
+final success rate:  0.6015625
+fps step: 4835 fps step and policy inference: 4506 fps total: 2064 epoch: 699/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 6681 fps step and policy inference: 6070 fps total: 2344 epoch: 700/16384
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion_ep_700_rew_176.08943.pth'
+final success rate:  0.5625
+fps step: 6165 fps step and policy inference: 5641 fps total: 2281 epoch: 701/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6526 fps step and policy inference: 5939 fps total: 2340 epoch: 702/16384
+final success rate:  0.5859375
+fps step: 6558 fps step and policy inference: 5969 fps total: 2338 epoch: 703/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 5904 fps step and policy inference: 5423 fps total: 2241 epoch: 704/16384
+final success rate:  0.546875
+fps step: 7056 fps step and policy inference: 6377 fps total: 2393 epoch: 705/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 5443 fps step and policy inference: 5029 fps total: 2168 epoch: 706/16384
+final success rate:  0.6328125
+fps step: 7720 fps step and policy inference: 6916 fps total: 2460 epoch: 707/16384
+saving next best rewards:  [189.5]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 5151 fps step and policy inference: 4777 fps total: 2120 epoch: 708/16384
+final success rate:  0.5234375
+fps step: 8465 fps step and policy inference: 7509 fps total: 2531 epoch: 709/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+final success rate:  0.6484375
+fps step: 4913 fps step and policy inference: 4574 fps total: 2077 epoch: 710/16384
+saving next best rewards:  [195.84]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 6655 fps step and policy inference: 6054 fps total: 2346 epoch: 711/16384
+final success rate:  0.4765625
+fps step: 6203 fps step and policy inference: 5671 fps total: 2288 epoch: 712/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 6387 fps step and policy inference: 5824 fps total: 2313 epoch: 713/16384
+final success rate:  0.515625
+fps step: 6516 fps step and policy inference: 5932 fps total: 2327 epoch: 714/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 5915 fps step and policy inference: 5428 fps total: 2241 epoch: 715/16384
+final success rate:  0.59375
+fps step: 7137 fps step and policy inference: 6445 fps total: 2400 epoch: 716/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 5425 fps step and policy inference: 5015 fps total: 2173 epoch: 717/16384
+final success rate:  0.5625
+fps step: 7617 fps step and policy inference: 6832 fps total: 2449 epoch: 718/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 5149 fps step and policy inference: 4778 fps total: 2122 epoch: 719/16384
+final success rate:  0.6328125
+fps step: 8410 fps step and policy inference: 7464 fps total: 2532 epoch: 720/16384
+saving next best rewards:  [218.97]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9688, device='cuda:0')
+final success rate:  0.59375
+fps step: 4902 fps step and policy inference: 4562 fps total: 2074 epoch: 721/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 6562 fps step and policy inference: 5973 fps total: 2333 epoch: 722/16384
+final success rate:  0.5
+fps step: 6187 fps step and policy inference: 5659 fps total: 2292 epoch: 723/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 6229 fps step and policy inference: 5696 fps total: 2286 epoch: 724/16384
+final success rate:  0.59375
+fps step: 6634 fps step and policy inference: 6032 fps total: 2340 epoch: 725/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 5787 fps step and policy inference: 5323 fps total: 2228 epoch: 726/16384
+final success rate:  0.5078125
+fps step: 7118 fps step and policy inference: 6430 fps total: 2400 epoch: 727/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 5377 fps step and policy inference: 4975 fps total: 2162 epoch: 728/16384
+final success rate:  0.5546875
+fps step: 7760 fps step and policy inference: 6946 fps total: 2470 epoch: 729/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 5067 fps step and policy inference: 4708 fps total: 2111 epoch: 730/16384
+final success rate:  0.5859375
+fps step: 8326 fps step and policy inference: 7395 fps total: 2529 epoch: 731/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+final success rate:  0.6015625
+fps step: 4857 fps step and policy inference: 4524 fps total: 2072 epoch: 732/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 6196 fps step and policy inference: 5661 fps total: 2280 epoch: 733/16384
+final success rate:  0.6328125
+fps step: 6175 fps step and policy inference: 5649 fps total: 2321 epoch: 734/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 6756 fps step and policy inference: 6260 fps total: 2513 epoch: 735/16384
+final success rate:  0.6640625
+fps step: 7028 fps step and policy inference: 6492 fps total: 2549 epoch: 736/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6383 fps step and policy inference: 5941 fps total: 2468 epoch: 737/16384
+final success rate:  0.6796875
+fps step: 7728 fps step and policy inference: 7089 fps total: 2641 epoch: 738/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 5790 fps step and policy inference: 5425 fps total: 2370 epoch: 739/16384
+final success rate:  0.5859375
+fps step: 8423 fps step and policy inference: 7674 fps total: 2718 epoch: 740/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 5465 fps step and policy inference: 5138 fps total: 2308 epoch: 741/16384
+final success rate:  0.5546875
+fps step: 9352 fps step and policy inference: 8438 fps total: 2811 epoch: 742/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+final success rate:  0.5625
+fps step: 5167 fps step and policy inference: 4873 fps total: 2263 epoch: 743/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 7314 fps step and policy inference: 6743 fps total: 2590 epoch: 744/16384
+final success rate:  0.5546875
+fps step: 6695 fps step and policy inference: 6211 fps total: 2503 epoch: 745/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 6862 fps step and policy inference: 6356 fps total: 2538 epoch: 746/16384
+final success rate:  0.5625
+fps step: 7058 fps step and policy inference: 6522 fps total: 2555 epoch: 747/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 6201 fps step and policy inference: 5784 fps total: 2434 epoch: 748/16384
+final success rate:  0.421875
+fps step: 7803 fps step and policy inference: 7155 fps total: 2648 epoch: 749/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 5758 fps step and policy inference: 5397 fps total: 2367 epoch: 750/16384
+final success rate:  0.5390625
+fps step: 8476 fps step and policy inference: 7719 fps total: 2728 epoch: 751/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 5464 fps step and policy inference: 5138 fps total: 2312 epoch: 752/16384
+final success rate:  0.546875
+fps step: 9346 fps step and policy inference: 8426 fps total: 2816 epoch: 753/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+final success rate:  0.4453125
+fps step: 5097 fps step and policy inference: 4812 fps total: 2246 epoch: 754/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 7171 fps step and policy inference: 6620 fps total: 2574 epoch: 755/16384
+final success rate:  0.5625
+fps step: 6597 fps step and policy inference: 6125 fps total: 2492 epoch: 756/16384
+lift success rate:  tensor(0.9297, device='cuda:0')
+fps step: 6674 fps step and policy inference: 6193 fps total: 2509 epoch: 757/16384
+final success rate:  0.46875
+fps step: 7057 fps step and policy inference: 6522 fps total: 2556 epoch: 758/16384
+lift success rate:  tensor(0.9062, device='cuda:0')
+fps step: 6113 fps step and policy inference: 5708 fps total: 2420 epoch: 759/16384
+final success rate:  0.4453125
+fps step: 7714 fps step and policy inference: 7082 fps total: 2643 epoch: 760/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 5727 fps step and policy inference: 5371 fps total: 2359 epoch: 761/16384
+final success rate:  0.546875
+fps step: 8532 fps step and policy inference: 7762 fps total: 2736 epoch: 762/16384
+lift success rate:  tensor(0.9297, device='cuda:0')
+fps step: 5391 fps step and policy inference: 5073 fps total: 2303 epoch: 763/16384
+final success rate:  0.5234375
+fps step: 9241 fps step and policy inference: 8344 fps total: 2801 epoch: 764/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+final success rate:  0.484375
+fps step: 5084 fps step and policy inference: 4797 fps total: 2244 epoch: 765/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 7315 fps step and policy inference: 6745 fps total: 2596 epoch: 766/16384
+final success rate:  0.53125
+fps step: 6647 fps step and policy inference: 6170 fps total: 2506 epoch: 767/16384
+lift success rate:  tensor(0.8984, device='cuda:0')
+fps step: 6808 fps step and policy inference: 6305 fps total: 2529 epoch: 768/16384
+final success rate:  0.390625
+fps step: 7168 fps step and policy inference: 6619 fps total: 2581 epoch: 769/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 6221 fps step and policy inference: 5802 fps total: 2443 epoch: 770/16384
+final success rate:  0.484375
+fps step: 7646 fps step and policy inference: 7024 fps total: 2632 epoch: 771/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 5685 fps step and policy inference: 5332 fps total: 2356 epoch: 772/16384
+final success rate:  0.46875
+fps step: 8395 fps step and policy inference: 7646 fps total: 2713 epoch: 773/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 5457 fps step and policy inference: 5132 fps total: 2310 epoch: 774/16384
+final success rate:  0.4375
+fps step: 9399 fps step and policy inference: 8476 fps total: 2813 epoch: 775/16384
+lift success rate:  tensor(0.9375, device='cuda:0')
+final success rate:  0.4921875
+fps step: 5150 fps step and policy inference: 4856 fps total: 2263 epoch: 776/16384
+lift success rate:  tensor(0.9375, device='cuda:0')
+fps step: 7234 fps step and policy inference: 6670 fps total: 2579 epoch: 777/16384
+final success rate:  0.4375
+fps step: 6647 fps step and policy inference: 6171 fps total: 2509 epoch: 778/16384
+lift success rate:  tensor(0.9375, device='cuda:0')
+fps step: 6843 fps step and policy inference: 6339 fps total: 2530 epoch: 779/16384
+final success rate:  0.4453125
+fps step: 7055 fps step and policy inference: 6523 fps total: 2565 epoch: 780/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 6173 fps step and policy inference: 5760 fps total: 2435 epoch: 781/16384
+final success rate:  0.4609375
+fps step: 7640 fps step and policy inference: 7020 fps total: 2635 epoch: 782/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 5700 fps step and policy inference: 5345 fps total: 2358 epoch: 783/16384
+final success rate:  0.359375
+fps step: 8540 fps step and policy inference: 7772 fps total: 2730 epoch: 784/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 5427 fps step and policy inference: 5101 fps total: 2307 epoch: 785/16384
+final success rate:  0.3046875
+fps step: 9385 fps step and policy inference: 8464 fps total: 2819 epoch: 786/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+final success rate:  0.46875
+fps step: 5098 fps step and policy inference: 4811 fps total: 2243 epoch: 787/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 7263 fps step and policy inference: 6698 fps total: 2588 epoch: 788/16384
+final success rate:  0.4375
+fps step: 6634 fps step and policy inference: 6159 fps total: 2496 epoch: 789/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 6870 fps step and policy inference: 6360 fps total: 2540 epoch: 790/16384
+final success rate:  0.4609375
+fps step: 6986 fps step and policy inference: 6461 fps total: 2563 epoch: 791/16384
+lift success rate:  tensor(0.9375, device='cuda:0')
+fps step: 6205 fps step and policy inference: 5760 fps total: 2426 epoch: 792/16384
+final success rate:  0.6015625
+fps step: 7767 fps step and policy inference: 7122 fps total: 2648 epoch: 793/16384
+lift success rate:  tensor(0.9219, device='cuda:0')
+fps step: 5712 fps step and policy inference: 5355 fps total: 2359 epoch: 794/16384
+final success rate:  0.4765625
+fps step: 8383 fps step and policy inference: 7639 fps total: 2713 epoch: 795/16384
+lift success rate:  tensor(0.9141, device='cuda:0')
+fps step: 5433 fps step and policy inference: 5110 fps total: 2310 epoch: 796/16384
+final success rate:  0.46875
+fps step: 8848 fps step and policy inference: 8004 fps total: 2759 epoch: 797/16384
+lift success rate:  tensor(0.9297, device='cuda:0')
+final success rate:  0.4921875
+fps step: 5134 fps step and policy inference: 4843 fps total: 2256 epoch: 798/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 7126 fps step and policy inference: 6582 fps total: 2563 epoch: 799/16384
+final success rate:  0.5546875
+fps step: 6528 fps step and policy inference: 6060 fps total: 2487 epoch: 800/16384
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion_ep_800_rew_195.14099.pth'
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 6843 fps step and policy inference: 6342 fps total: 2527 epoch: 801/16384
+final success rate:  0.609375
+fps step: 6915 fps step and policy inference: 6399 fps total: 2534 epoch: 802/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 6170 fps step and policy inference: 5756 fps total: 2430 epoch: 803/16384
+final success rate:  0.5390625
+fps step: 7711 fps step and policy inference: 7068 fps total: 2636 epoch: 804/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 5651 fps step and policy inference: 5301 fps total: 2353 epoch: 805/16384
+final success rate:  0.5546875
+fps step: 8233 fps step and policy inference: 7515 fps total: 2702 epoch: 806/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 5359 fps step and policy inference: 5043 fps total: 2292 epoch: 807/16384
+final success rate:  0.4921875
+fps step: 9040 fps step and policy inference: 8182 fps total: 2778 epoch: 808/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+final success rate:  0.5703125
+fps step: 5029 fps step and policy inference: 4749 fps total: 2233 epoch: 809/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 7174 fps step and policy inference: 6623 fps total: 2577 epoch: 810/16384
+final success rate:  0.609375
+fps step: 6525 fps step and policy inference: 6065 fps total: 2483 epoch: 811/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 6677 fps step and policy inference: 6193 fps total: 2505 epoch: 812/16384
+final success rate:  0.5546875
+fps step: 6893 fps step and policy inference: 6381 fps total: 2532 epoch: 813/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 6124 fps step and policy inference: 5715 fps total: 2427 epoch: 814/16384
+final success rate:  0.5234375
+fps step: 7666 fps step and policy inference: 7038 fps total: 2634 epoch: 815/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 5691 fps step and policy inference: 5337 fps total: 2348 epoch: 816/16384
+final success rate:  0.5703125
+fps step: 8335 fps step and policy inference: 7592 fps total: 2708 epoch: 817/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+fps step: 5326 fps step and policy inference: 5013 fps total: 2284 epoch: 818/16384
+final success rate:  0.5703125
+fps step: 9163 fps step and policy inference: 8280 fps total: 2789 epoch: 819/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+final success rate:  0.625
+fps step: 5070 fps step and policy inference: 4786 fps total: 2240 epoch: 820/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 7194 fps step and policy inference: 6640 fps total: 2581 epoch: 821/16384
+final success rate:  0.6953125
+fps step: 6591 fps step and policy inference: 6122 fps total: 2491 epoch: 822/16384
+saving next best rewards:  [226.07]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 6713 fps step and policy inference: 6226 fps total: 2498 epoch: 823/16384
+final success rate:  0.4375
+fps step: 6935 fps step and policy inference: 6408 fps total: 2532 epoch: 824/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 6245 fps step and policy inference: 5817 fps total: 2441 epoch: 825/16384
+final success rate:  0.578125
+fps step: 7615 fps step and policy inference: 6985 fps total: 2623 epoch: 826/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 5750 fps step and policy inference: 5383 fps total: 2350 epoch: 827/16384
+final success rate:  0.671875
+fps step: 8305 fps step and policy inference: 7566 fps total: 2693 epoch: 828/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 5379 fps step and policy inference: 5059 fps total: 2296 epoch: 829/16384
+final success rate:  0.578125
+fps step: 8860 fps step and policy inference: 8027 fps total: 2756 epoch: 830/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+final success rate:  0.65625
+fps step: 5057 fps step and policy inference: 4771 fps total: 2231 epoch: 831/16384
+lift success rate:  tensor(1., device='cuda:0')
+fps step: 7029 fps step and policy inference: 6494 fps total: 2541 epoch: 832/16384
+final success rate:  0.6015625
+fps step: 6513 fps step and policy inference: 6047 fps total: 2257 epoch: 833/16384
+lift success rate:  tensor(0.9844, device='cuda:0')
+fps step: 6552 fps step and policy inference: 6080 fps total: 2231 epoch: 834/16384
+final success rate:  0.5625
+fps step: 6898 fps step and policy inference: 6380 fps total: 2272 epoch: 835/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 6000 fps step and policy inference: 5606 fps total: 2165 epoch: 836/16384
+final success rate:  0.578125
+fps step: 7659 fps step and policy inference: 7025 fps total: 2353 epoch: 837/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 5629 fps step and policy inference: 5279 fps total: 2115 epoch: 838/16384
+final success rate:  0.5703125
+fps step: 8305 fps step and policy inference: 7558 fps total: 2407 epoch: 839/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 5269 fps step and policy inference: 4961 fps total: 2066 epoch: 840/16384
+final success rate:  0.625
+fps step: 8860 fps step and policy inference: 8020 fps total: 2449 epoch: 841/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+final success rate:  0.5859375
+fps step: 5082 fps step and policy inference: 4792 fps total: 2039 epoch: 842/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 6929 fps step and policy inference: 6406 fps total: 2274 epoch: 843/16384
+final success rate:  0.5703125
+fps step: 6539 fps step and policy inference: 6064 fps total: 2233 epoch: 844/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 6620 fps step and policy inference: 6141 fps total: 2241 epoch: 845/16384
+final success rate:  0.6171875
+fps step: 6950 fps step and policy inference: 6422 fps total: 2279 epoch: 846/16384
+lift success rate:  tensor(0.9922, device='cuda:0')
+fps step: 6135 fps step and policy inference: 5717 fps total: 2189 epoch: 847/16384
+final success rate:  0.640625
+fps step: 7693 fps step and policy inference: 7055 fps total: 2354 epoch: 848/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 5693 fps step and policy inference: 5336 fps total: 2125 epoch: 849/16384
+final success rate:  0.6953125
+fps step: 8406 fps step and policy inference: 7649 fps total: 2422 epoch: 850/16384
+saving next best rewards:  [232.59]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 5340 fps step and policy inference: 5024 fps total: 2076 epoch: 851/16384
+final success rate:  0.65625
+fps step: 9230 fps step and policy inference: 8323 fps total: 2475 epoch: 852/16384
+lift success rate:  tensor(0.9531, device='cuda:0')
+final success rate:  0.640625
+fps step: 5102 fps step and policy inference: 4812 fps total: 2039 epoch: 853/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 7149 fps step and policy inference: 6596 fps total: 2301 epoch: 854/16384
+final success rate:  0.6796875
+fps step: 6609 fps step and policy inference: 6131 fps total: 2244 epoch: 855/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 6770 fps step and policy inference: 6270 fps total: 2266 epoch: 856/16384
+final success rate:  0.6328125
+fps step: 6942 fps step and policy inference: 6417 fps total: 2281 epoch: 857/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 5996 fps step and policy inference: 5591 fps total: 2166 epoch: 858/16384
+final success rate:  0.734375
+fps step: 7612 fps step and policy inference: 6986 fps total: 2347 epoch: 859/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+fps step: 5586 fps step and policy inference: 5241 fps total: 2110 epoch: 860/16384
+final success rate:  0.546875
+fps step: 8327 fps step and policy inference: 7579 fps total: 2416 epoch: 861/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 5295 fps step and policy inference: 4985 fps total: 2069 epoch: 862/16384
+final success rate:  0.671875
+fps step: 8971 fps step and policy inference: 8116 fps total: 2466 epoch: 863/16384
+lift success rate:  tensor(0.9453, device='cuda:0')
+final success rate:  0.6171875
+fps step: 4956 fps step and policy inference: 4660 fps total: 2009 epoch: 864/16384
+lift success rate:  tensor(0.9609, device='cuda:0')
+fps step: 6915 fps step and policy inference: 6389 fps total: 2276 epoch: 865/16384
+final success rate:  0.609375
+fps step: 6489 fps step and policy inference: 6028 fps total: 2228 epoch: 866/16384
+lift success rate:  tensor(0.8594, device='cuda:0')
+fps step: 6439 fps step and policy inference: 5985 fps total: 2222 epoch: 867/16384
+final success rate:  0.5625
+fps step: 6693 fps step and policy inference: 6167 fps total: 2319 epoch: 868/16384
+lift success rate:  tensor(0.8359, device='cuda:0')
+fps step: 5922 fps step and policy inference: 5531 fps total: 2384 epoch: 869/16384
+final success rate:  0.6015625
+fps step: 7608 fps step and policy inference: 6981 fps total: 2617 epoch: 870/16384
+lift success rate:  tensor(0.8047, device='cuda:0')
+fps step: 5420 fps step and policy inference: 5079 fps total: 2737 epoch: 871/16384
+final success rate:  0.5234375
+fps step: 7503 fps step and policy inference: 6848 fps total: 2441 epoch: 872/16384
+lift success rate:  tensor(0.8516, device='cuda:0')
+fps step: 3893 fps step and policy inference: 3626 fps total: 1737 epoch: 873/16384
+final success rate:  0.546875
+fps step: 4708 fps step and policy inference: 4139 fps total: 1978 epoch: 874/16384
+lift success rate:  tensor(0.8438, device='cuda:0')
+final success rate:  0.578125
+fps step: 3269 fps step and policy inference: 3016 fps total: 1680 epoch: 875/16384
+lift success rate:  tensor(0.7812, device='cuda:0')
+fps step: 3379 fps step and policy inference: 3065 fps total: 1698 epoch: 876/16384
+final success rate:  0.484375
+fps step: 3905 fps step and policy inference: 3535 fps total: 1829 epoch: 877/16384
+lift success rate:  tensor(0.8438, device='cuda:0')
+fps step: 3717 fps step and policy inference: 3359 fps total: 1784 epoch: 878/16384
+final success rate:  0.4921875
+fps step: 4190 fps step and policy inference: 3809 fps total: 1908 epoch: 879/16384
+lift success rate:  tensor(0.8672, device='cuda:0')
+fps step: 3648 fps step and policy inference: 3334 fps total: 1777 epoch: 880/16384
+final success rate:  0.4921875
+fps step: 4491 fps step and policy inference: 4046 fps total: 1964 epoch: 881/16384
+lift success rate:  tensor(0.9062, device='cuda:0')
+fps step: 3454 fps step and policy inference: 3209 fps total: 1753 epoch: 882/16384
+final success rate:  0.5625
+fps step: 4613 fps step and policy inference: 4088 fps total: 1977 epoch: 883/16384
+lift success rate:  tensor(0.9062, device='cuda:0')
+fps step: 3311 fps step and policy inference: 3066 fps total: 1704 epoch: 884/16384
+final success rate:  0.625
+fps step: 5096 fps step and policy inference: 4428 fps total: 2046 epoch: 885/16384
+lift success rate:  tensor(0.9219, device='cuda:0')
+final success rate:  0.6484375
+fps step: 3309 fps step and policy inference: 3047 fps total: 1700 epoch: 886/16384
+lift success rate:  tensor(0.8672, device='cuda:0')
+fps step: 3656 fps step and policy inference: 3275 fps total: 1765 epoch: 887/16384
+final success rate:  0.5390625
+fps step: 3925 fps step and policy inference: 3529 fps total: 1839 epoch: 888/16384
+lift success rate:  tensor(0.8828, device='cuda:0')
+fps step: 3486 fps step and policy inference: 3185 fps total: 1738 epoch: 889/16384
+final success rate:  0.4609375
+fps step: 3969 fps step and policy inference: 3600 fps total: 1858 epoch: 890/16384
+lift success rate:  tensor(0.9141, device='cuda:0')
+fps step: 3468 fps step and policy inference: 3173 fps total: 1735 epoch: 891/16384
+final success rate:  0.5234375
+fps step: 4506 fps step and policy inference: 4036 fps total: 1970 epoch: 892/16384
+lift success rate:  tensor(0.8750, device='cuda:0')
+fps step: 3378 fps step and policy inference: 3086 fps total: 1707 epoch: 893/16384
+final success rate:  0.5234375
+fps step: 4651 fps step and policy inference: 4145 fps total: 1993 epoch: 894/16384
+lift success rate:  tensor(0.8672, device='cuda:0')
+fps step: 3529 fps step and policy inference: 3283 fps total: 1814 epoch: 895/16384
+final success rate:  0.5078125
+fps step: 5374 fps step and policy inference: 4794 fps total: 2178 epoch: 896/16384
+lift success rate:  tensor(0.9062, device='cuda:0')
+final success rate:  0.4921875
+fps step: 3320 fps step and policy inference: 3082 fps total: 1750 epoch: 897/16384
+lift success rate:  tensor(0.9141, device='cuda:0')
+fps step: 4028 fps step and policy inference: 3661 fps total: 1903 epoch: 898/16384
+final success rate:  0.6015625
+fps step: 4584 fps step and policy inference: 4209 fps total: 2063 epoch: 899/16384
+lift success rate:  tensor(0.9297, device='cuda:0')
+fps step: 3821 fps step and policy inference: 3474 fps total: 1861 epoch: 900/16384
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion_ep_900_rew_170.40848.pth'
+final success rate:  0.6875
+fps step: 4954 fps step and policy inference: 4468 fps total: 2122 epoch: 901/16384
+lift success rate:  tensor(0.9375, device='cuda:0')
+fps step: 3501 fps step and policy inference: 3235 fps total: 1786 epoch: 902/16384
+final success rate:  0.6875
+fps step: 7222 fps step and policy inference: 6645 fps total: 2582 epoch: 903/16384
+lift success rate:  tensor(0.9375, device='cuda:0')
+fps step: 5613 fps step and policy inference: 5270 fps total: 2337 epoch: 904/16384
+final success rate:  0.625
+fps step: 8375 fps step and policy inference: 7633 fps total: 2718 epoch: 905/16384
+lift success rate:  tensor(0.9375, device='cuda:0')
+fps step: 5256 fps step and policy inference: 4952 fps total: 2279 epoch: 906/16384
+final success rate:  0.6953125
+fps step: 9126 fps step and policy inference: 8254 fps total: 2787 epoch: 907/16384
+lift success rate:  tensor(0.9297, device='cuda:0')
+final success rate:  0.6953125
+fps step: 5083 fps step and policy inference: 4799 fps total: 2238 epoch: 908/16384
+lift success rate:  tensor(0.9297, device='cuda:0')
+fps step: 7113 fps step and policy inference: 6572 fps total: 2565 epoch: 909/16384
+final success rate:  0.65625
+fps step: 6626 fps step and policy inference: 6152 fps total: 2501 epoch: 910/16384
+lift success rate:  tensor(0.9766, device='cuda:0')
+fps step: 6815 fps step and policy inference: 6313 fps total: 2521 epoch: 911/16384
+final success rate:  0.7421875
+fps step: 6977 fps step and policy inference: 6455 fps total: 2548 epoch: 912/16384
+saving next best rewards:  [239.43]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 6055 fps step and policy inference: 5641 fps total: 2405 epoch: 913/16384
+final success rate:  0.8046875
+fps step: 7677 fps step and policy inference: 7046 fps total: 2621 epoch: 914/16384
+saving next best rewards:  [252.19]
+=> saving checkpoint 'runs/FactoryTaskInsertion/nn/20220817114853/FactoryTaskInsertion.pth'
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 5620 fps step and policy inference: 5278 fps total: 2334 epoch: 915/16384
+final success rate:  0.6875
+fps step: 8376 fps step and policy inference: 7634 fps total: 2708 epoch: 916/16384
+lift success rate:  tensor(0.9688, device='cuda:0')
+fps step: 5319 fps step and policy inference: 5009 fps total: 2290 epoch: 917/16384
+final success rate:  0.7109375
+fps step: 9238 fps step and policy inference: 8337 fps total: 2798 epoch: 918/16384

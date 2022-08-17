@@ -98,8 +98,7 @@ class FactoryTaskNutBoltPick(FactoryEnvNutBolt, FactoryABCTask):
                                              device=self.device)
         self.keypoints_nut = torch.zeros_like(self.keypoints_gripper, device=self.device)
 
-        self.identity_quat = torch.tensor([0.0, 0.0, 0.0, 1.0], device=self.device).unsqueeze(0).repeat(self.num_envs,
-                                                                                                        1)
+        self.identity_quat = torch.tensor([0.0, 0.0, 0.0, 1.0], device=self.device).unsqueeze(0).repeat(self.num_envs, 1)
 
     def _refresh_task_tensors(self):
         """Refresh tensors."""
@@ -377,7 +376,6 @@ class FactoryTaskNutBoltPick(FactoryEnvNutBolt, FactoryABCTask):
 
     def _check_lift_success(self, height_multiple):
         """Check if nut is above table by more than specified multiple times height of nut."""
-
         lift_success = torch.where(
             self.nut_pos[:, 2] > self.cfg_base.env.table_height + self.nut_heights.squeeze(-1) * height_multiple,
             torch.ones((self.num_envs,), device=self.device),

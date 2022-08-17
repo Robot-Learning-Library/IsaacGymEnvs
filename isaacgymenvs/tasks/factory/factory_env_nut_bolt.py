@@ -184,7 +184,6 @@ class FactoryEnvNutBolt(FactoryBase, FactoryABCEnv):
                 franka_handle = self.gym.create_actor(env_ptr, franka_asset, franka_pose, 'franka', i, 0, 0)
             self.franka_actor_ids_sim.append(actor_count)
             actor_count += 1
-
             j = np.random.randint(0, len(self.cfg_env.env.desired_subassemblies))
             subassembly = self.cfg_env.env.desired_subassemblies[j]
             components = list(self.asset_info_nut_bolt[subassembly])

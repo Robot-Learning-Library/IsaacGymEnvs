@@ -13,7 +13,16 @@ sim:
 env:
     env_name: 'FactoryEnvNutBolt'
 
-    desired_subassemblies: ['nut_bolt_m16_tight', 'nut_bolt_m16_loose']
+    desired_subassemblies: ['nut_bolt_m4_tight',
+                            'nut_bolt_m4_loose',
+                            'nut_bolt_m8_tight',
+                            'nut_bolt_m8_loose',
+                            'nut_bolt_m12_tight',
+                            'nut_bolt_m12_loose',
+                            'nut_bolt_m16_tight', 
+                            'nut_bolt_m16_loose',
+                            'nut_bolt_m20_tight',
+                            'nut_bolt_m20_loose']
     nut_lateral_offset: 0.1  # Y-axis offset of nut before initial reset to prevent initial interpenetration with bolt
     nut_bolt_density: 7850.0
     nut_bolt_friction: 0.3

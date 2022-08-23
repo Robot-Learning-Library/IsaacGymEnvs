@@ -17,7 +17,7 @@ sim:
 
 env:
     numEnvs: 128
-    numObservations: 27 # 33
+    numObservations: 27 # 33  27+2+6  2 dim diameters, 6 dim forces
     numActions: 12
 
     close_and_lift: True  # close gripper and lift after last step of episode

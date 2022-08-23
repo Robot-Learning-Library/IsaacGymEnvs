@@ -250,6 +250,9 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
                 self._close_gripper(sim_steps=self.cfg_task.env.num_gripper_close_sim_steps)
                 self._lift_gripper(sim_steps=self.cfg_task.env.num_gripper_lift_sim_steps)
 
+        if is_last_step:  # open gripper and lift up to see if the plug is already in socket
+                self._open_gripper(sim_steps=self.cfg_task.env.num_gripper_close_sim_steps)
+                self._lift_gripper(franka_gripper_width=self.asset_info_franka_table.franka_gripper_width_max, sim_steps=self.cfg_task.env.num_gripper_lift_sim_steps)
 
         self.refresh_base_tensors()
         self.refresh_env_tensors()
@@ -259,20 +262,23 @@ class FactoryTaskInsertion(FactoryEnvInsertion, FactoryABCTask):
 
     def compute_observations(self):
         """Compute observations."""
-
         # Shallow copies of tensors
-        obs_tensors = [self.fingertip_midpoint_pos,
-                       self.fingertip_midpoint_quat,
-                       self.fingertip_midpoint_linvel,
-                       self.fingertip_midpoint_angvel,
-                       self.plug_pos,
-                       self.plug_quat,
-                    #    self.plug_linvel,
-                    #    self.plug_angvel,
-                    #    self.plug_grasp_pos,
-                    #    self.plug_grasp_quat,
-                       self.socket_pos,
-                       self.socket_quat
+        obs_tensors = [self.fingertip_midpoint_pos,  # 3 dim
+                       self.fingertip_midpoint_quat, # 4 dim
+                       self.fingertip_midpoint_linvel,  # 3 dim
+                       self.fingertip_midpoint_angvel,  # 3 dim
+                       self.plug_pos,   # 3 dim
+                       self.plug_quat,  # 4 dim
+
+                    #    self.plug_linvel,  # 3 dim
+                    #    self.plug_angvel,  # 3 dim
+                    #    self.plug_grasp_pos,  # 3 dim
+                    #    self.plug_grasp_quat, # 4 dim
+
+                       self.socket_pos,  # 3 dim
+                       self.socket_quat, # 4 dim
+                    #    self.peg_diameters,  # 1 dim
+                    #    self.hole_diameters  # 1 dim
                        ]
 
         if self.cfg_task.rl.add_obs_finger_force:

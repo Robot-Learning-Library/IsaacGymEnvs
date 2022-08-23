@@ -1,0 +1,301 @@
+train.py:49: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name="config", config_path="./cfg")
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/hydra/_internal/defaults_list.py:251: UserWarning: In 'config': Defaults list is missing `_self_`. See https://hydra.cc/docs/upgrades/1.0_to_1.1/default_composition_order for more information
+  warnings.warn(msg, UserWarning)
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/hydra/_internal/defaults_list.py:415: UserWarning: In config: Invalid overriding of hydra/job_logging:
+Default list overrides requires 'override' keyword.
+See https://hydra.cc/docs/next/upgrades/1.0_to_1.1/defaults_list_override for more information.
+
+  deprecation_warning(msg)
+Importing module 'gym_37' (/home/zihan/software/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_37.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/zihan/software/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.12.0+cu102
+Device count 2
+/home/zihan/software/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Using /home/zihan/.cache/torch_extensions/py37_cu102 as PyTorch extensions root...
+Emitting ninja build file /home/zihan/.cache/torch_extensions/py37_cu102/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/hydra/_internal/hydra.py:127: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/next/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  configure_logging=with_log_configuration,
+ninja: no work to do.
+/home/zihan/software/isaacgym/python/isaacgym/torch_utils.py:135: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  def get_axis_params(value, axis_idx, x_value=0., dtype=np.float, n_dims=3):
+2022-08-23 11:17:16,356 - INFO - logger - logger initialized
+2022-08-23 11:17:17.401288: I tensorflow/core/util/util.cc:169] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+<unknown>:6: DeprecationWarning: invalid escape sequence \*
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/flatbuffers/compat.py:19: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/keras/utils/image_utils.py:36: DeprecationWarning: NEAREST is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.NEAREST or Dither.NONE instead.
+  'nearest': pil_image.NEAREST,
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/keras/utils/image_utils.py:37: DeprecationWarning: BILINEAR is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BILINEAR instead.
+  'bilinear': pil_image.BILINEAR,
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/keras/utils/image_utils.py:38: DeprecationWarning: BICUBIC is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BICUBIC instead.
+  'bicubic': pil_image.BICUBIC,
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/keras/utils/image_utils.py:39: DeprecationWarning: HAMMING is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.HAMMING instead.
+  'hamming': pil_image.HAMMING,
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/keras/utils/image_utils.py:40: DeprecationWarning: BOX is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BOX instead.
+  'box': pil_image.BOX,
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/keras/utils/image_utils.py:41: DeprecationWarning: LANCZOS is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.LANCZOS instead.
+  'lanczos': pil_image.LANCZOS,
+wandb: W&B API key is configured (use `wandb login --relogin` to force relogin)
+Loading extension module gymtorch...
+Error: FBX library failed to load - importing FBX data will not succeed. Message: No module named 'fbx'
+FBX tools must be installed from https://help.autodesk.com/view/FBX/2020/ENU/?guid=FBX_Developer_Help_scripting_with_python_fbx_installing_python_fbx_html
+task: 
+    name: FactoryTaskInsertion
+    physics_engine: physx
+    sim: 
+        use_gpu_pipeline: True
+        up_axis: z
+        dt: 0.016667
+        gravity: [0.0, 0.0, -9.81]
+        disable_gravity: False
+    env: 
+        numEnvs: 128
+        numObservations: 27
+        numActions: 12
+        close_and_lift: True
+        num_gripper_move_sim_steps: 20
+        num_gripper_close_sim_steps: 25
+        num_gripper_lift_sim_steps: 25
+    randomize: 
+        joint_noise: 0.0
+        initial_state: random
+        plug_bias_y: -0.1
+        plug_bias_z: 0.0
+        plug_noise_xy: 0.05
+    rl: 
+        max_episode_length: 220
+        pos_action_scale: [0.1, 0.1, 0.1]
+        rot_action_scale: [0.1, 0.1, 0.1]
+        force_action_scale: [1.0, 1.0, 1.0]
+        torque_action_scale: [1.0, 1.0, 1.0]
+        gripper_action_scale: [1.0]
+        clamp_rot: True
+        clamp_rot_thresh: 1e-06
+        num_keypoints: 4
+        keypoint_scale: 0.5
+        keypoint_reward_scale: 1.0
+        action_penalty_scale: 0.0
+        add_obs_finger_force: False
+        far_error_thresh: 0.4
+        success_bonus: 5.0
+    ctrl: 
+        ctrl_type: joint_space_id
+        all: 
+            jacobian_type: geometric
+            gripper_prop_gains: [50, 50]
+            gripper_deriv_gains: [2, 2]
+        gym_default: 
+            ik_method: dls
+            joint_prop_gains: [40, 40, 40, 40, 40, 40, 40]
+            joint_deriv_gains: [8, 8, 8, 8, 8, 8, 8]
+            gripper_prop_gains: [500, 500]
+            gripper_deriv_gains: [20, 20]
+        joint_space_ik: 
+            ik_method: dls
+            joint_prop_gains: [1, 1, 1, 1, 1, 1, 1]
+            joint_deriv_gains: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+        joint_space_id: 
+            ik_method: dls
+            joint_prop_gains: [40, 40, 40, 40, 40, 40, 40]
+            joint_deriv_gains: [8, 8, 8, 8, 8, 8, 8]
+        task_space_impedance: 
+            motion_ctrl_axes: [1, 1, 1, 1, 1, 1]
+            task_prop_gains: [40, 40, 40, 40, 40, 40]
+            task_deriv_gains: [8, 8, 8, 8, 8, 8]
+        operational_space_motion: 
+            motion_ctrl_axes: [1, 1, 1, 1, 1, 1]
+            task_prop_gains: [1, 1, 1, 1, 1, 1]
+            task_deriv_gains: [1, 1, 1, 1, 1, 1]
+        open_loop_force: 
+            force_ctrl_axes: [0, 0, 1, 0, 0, 0]
+        closed_loop_force: 
+            force_ctrl_axes: [0, 0, 1, 0, 0, 0]
+            wrench_prop_gains: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+        hybrid_force_motion: 
+            motion_ctrl_axes: [1, 1, 0, 1, 1, 1]
+            task_prop_gains: [40, 40, 40, 40, 40, 40]
+            task_deriv_gains: [8, 8, 8, 8, 8, 8]
+            force_ctrl_axes: [0, 0, 1, 0, 0, 0]
+            wrench_prop_gains: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+train: 
+    params: 
+        seed: 42
+        algo: 
+            name: a2c_continuous
+        model: 
+            name: continuous_a2c_logstd
+        network: 
+            name: actor_critic
+            separate: False
+            space: 
+                continuous: 
+                    mu_activation: None
+                    sigma_activation: None
+                    mu_init: 
+                        name: default
+                    sigma_init: 
+                        name: const_initializer
+                        val: 0
+                    fixed_sigma: True
+            mlp: 
+                units: [256, 128, 64]
+                activation: elu
+                d2rl: False
+                initializer: 
+                    name: default
+                regularizer: 
+                    name: None
+        load_checkpoint: True
+        load_path: /home/zihan/research/IsaacGymEnvs/isaacgymenvs/runs/FactoryTaskInsertion/nn/20220817195332/FactoryTaskInsertion.pth
+        config: 
+            name: FactoryTaskInsertion
+            full_experiment_name: FactoryTaskInsertion
+            env_name: rlgpu
+            multi_gpu: False
+            ppo: True
+            mixed_precision: True
+            normalize_input: True
+            normalize_value: True
+            value_bootstrap: True
+            num_actors: 128
+            reward_shaper: 
+                scale_value: 1.0
+            normalize_advantage: True
+            gamma: 0.99
+            tau: 0.95
+            learning_rate: 0.0001
+            lr_schedule: fixed
+            schedule_type: standard
+            kl_threshold: 0.016
+            score_to_win: 20000
+            max_epochs: 16384
+            save_best_after: 50
+            save_frequency: 100
+            print_stats: True
+            grad_norm: 1.0
+            entropy_coef: 0.0
+            truncate_grads: False
+            e_clip: 0.2
+            horizon_length: 120
+            minibatch_size: 512
+            mini_epochs: 8
+            critic_coef: 2
+            clip_value: True
+            seq_len: 4
+            bounds_loss_coef: 0.0001
+task_name: FactoryTaskInsertion
+experiment: 
+num_envs: 
+seed: 42
+torch_deterministic: False
+max_iterations: 
+physics_engine: physx
+pipeline: gpu
+sim_device: cuda:0
+rl_device: cuda:0
+graphics_device_id: 0
+num_threads: 4
+solver_type: 1
+num_subscenes: 4
+test: False
+checkpoint: /home/zihan/research/IsaacGymEnvs/isaacgymenvs/runs/FactoryTaskInsertion/nn/20220817195332/FactoryTaskInsertion.pth
+multi_gpu: False
+wandb_activate: True
+wandb_group: 
+wandb_name: FactoryTaskInsertion
+wandb_entity: quantumiracle
+wandb_project: isaacgymenvs
+capture_video: True
+capture_video_freq: 1464
+capture_video_len: 100
+force_render: True
+headless: True
+Setting seed: 42
+2022-08-23 11:17:25.228664: I tensorflow/core/util/util.cc:169] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+wandb: wandb version 0.13.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.12.11
+wandb: Run data is saved locally in /home/zihan/research/IsaacGymEnvs/isaacgymenvs/wandb/run-20220823_111723-17k9lu2p
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run FactoryTaskInsertion_2022-08-23_11-17-16
+wandb: ⭐️ View project at https://wandb.ai/quantumiracle/isaacgymenvs
+wandb: 🚀 View run at https://wandb.ai/quantumiracle/isaacgymenvs/runs/17k9lu2p
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+[Error] [carb.gym.plugin] Failed to resolve collision mesh '../mesh/factory_insertion/factory_usb_plug_coll.obj'
+[Error] [carb.gym.plugin] Failed to resolve visual mesh '../mesh/factory_insertion/factory_usb_plug_viz.obj'
+[Error] [carb.gym.plugin] Failed to resolve collision mesh '../mesh/factory_insertion/factory_usb_socket_coll.obj'
+[Error] [carb.gym.plugin] Failed to resolve visual mesh '../mesh/factory_insertion/factory_usb_socket_viz.obj'
+self.seed = 42
+Started to train
+Exact experiment name requested from command line: FactoryTaskInsertion
+/home/zihan/anaconda3/envs/x/lib/python3.7/site-packages/gym/spaces/box.py:84: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/factory/factory_base.py:507: UserWarning: [33mWARN: Please be patient: SDFs may be generating, which may take a few minutes. Terminating prematurely may result in a corrupted SDF cache.[0m
+  logger.warn('Please be patient: SDFs may be generating, which may take a few minutes. Terminating prematurely may result in a corrupted SDF cache.')
+Error executing job with overrides: ['task=FactoryTaskInsertion', 'headless=True', 'capture_video=True', 'checkpoint=runs/FactoryTaskInsertion/nn/20220817195332/FactoryTaskInsertion.pth', 'wandb_activate=True', 'wandb_entity=quantumiracle']
+Traceback (most recent call last):
+  File "train.py", line 160, in launch_rlg_hydra
+    'sigma' : None
+  File "/home/zihan/research/rl_games/rl_games/torch_runner.py", line 120, in run
+    self.run_train(args)
+  File "/home/zihan/research/rl_games/rl_games/torch_runner.py", line 98, in run_train
+    agent = self.algo_factory.create(self.algo_name, base_name='run', params=self.params)
+  File "/home/zihan/research/rl_games/rl_games/common/object_factory.py", line 15, in create
+    return builder(**kwargs)
+  File "/home/zihan/research/rl_games/rl_games/torch_runner.py", line 39, in <lambda>
+    self.algo_factory.register_builder('a2c_continuous', lambda **kwargs : a2c_continuous.A2CAgent(**kwargs))
+  File "/home/zihan/research/rl_games/rl_games/algos_torch/a2c_continuous.py", line 16, in __init__
+    a2c_common.ContinuousA2CBase.__init__(self, base_name, params)
+  File "/home/zihan/research/rl_games/rl_games/common/a2c_common.py", line 1008, in __init__
+    A2CBase.__init__(self, base_name, params)
+  File "/home/zihan/research/rl_games/rl_games/common/a2c_common.py", line 100, in __init__
+    self.vec_env = vecenv.create_vec_env(self.env_name, self.num_actors, **self.env_config)
+  File "/home/zihan/research/rl_games/rl_games/common/vecenv.py", line 222, in create_vec_env
+    return vecenv_config[vec_env_name](config_name, num_actors, **kwargs)
+  File "train.py", line 126, in <lambda>
+    lambda config_name, num_actors, **kwargs: RLGPUEnv(config_name, num_actors, **kwargs))
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/utils/rlgames_utils.py", line 153, in __init__
+    self.env = env_configurations.configurations[config_name]['env_creator'](**kwargs)
+  File "train.py", line 112, in create_env_thunk
+    **kwargs,
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/__init__.py", line 55, in make
+    return create_rlgpu_env()
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/utils/rlgames_utils.py", line 85, in create_rlgpu_env
+    force_render=force_render,
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/factory/factory_task_insertion.py", line 56, in __init__
+    super().__init__(cfg, rl_device, sim_device, graphics_device_id, headless, virtual_screen_capture, force_render)
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/factory/factory_env_insertion.py", line 54, in __init__
+    super().__init__(cfg, rl_device, sim_device, graphics_device_id, headless, virtual_screen_capture, force_render)
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/factory/factory_base.py", line 65, in __init__
+    super().__init__(cfg, rl_device, sim_device, graphics_device_id, headless, virtual_screen_capture, force_render)  # create_sim() is called here
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/base/vec_task.py", line 216, in __init__
+    self.create_sim()
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/factory/factory_base.py", line 115, in create_sim
+    self.create_envs()  # defined in subclass
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/factory/factory_env_insertion.py", line 85, in create_envs
+    self._create_actors(lower, upper, num_per_row, franka_asset, plug_assets, socket_assets, table_asset)
+  File "/home/zihan/research/IsaacGymEnvs/isaacgymenvs/tasks/factory/factory_env_insertion.py", line 187, in _create_actors
+    peg_diameter = self.asset_info_insertion[subassembly][components[0]]['diameter']
+omegaconf.errors.ConfigKeyError: Key 'diameter' is not in struct
+    full_key: ......assets.factory.yaml.usb.usb_plug.diameter
+    object_type=dict
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: - 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.025 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.025 MB uploaded (0.000 MB deduped)wandb: - 0.011 MB of 0.025 MB uploaded (0.000 MB deduped)wandb: \ 0.018 MB of 0.025 MB uploaded (0.000 MB deduped)wandb: | 0.025 MB of 0.025 MB uploaded (0.000 MB deduped)wandb: / 0.025 MB of 0.025 MB uploaded (0.000 MB deduped)wandb: - 0.025 MB of 0.025 MB uploaded (0.000 MB deduped)wandb: \ 0.025 MB of 0.025 MB uploaded (0.000 MB deduped)wandb: | 0.025 MB of 0.025 MB uploaded (0.000 MB deduped)wandb: / 0.025 MB of 0.025 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: Synced FactoryTaskInsertion_2022-08-23_11-17-16: https://wandb.ai/quantumiracle/isaacgymenvs/runs/17k9lu2p
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20220823_111723-17k9lu2p/logs
+

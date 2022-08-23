@@ -165,6 +165,9 @@ class FactoryEnvInsertion(FactoryBase, FactoryABCEnv):
         self.table_actor_ids_sim = []  # within-sim indices
         actor_count = 0
 
+        self.peg_diameters = []
+        self.hole_diameters = []
+
         for i in range(self.num_envs):
             env_ptr = self.gym.create_env(self.sim, lower, upper, num_per_row)
 
@@ -179,6 +182,12 @@ class FactoryEnvInsertion(FactoryBase, FactoryABCEnv):
             j = np.random.randint(0, len(self.cfg_env.env.desired_subassemblies))
             subassembly = self.cfg_env.env.desired_subassemblies[j]
             components = list(self.asset_info_insertion[subassembly])
+
+
+            peg_diameter = self.asset_info_insertion[subassembly][components[0]]['diameter']
+            hole_diameter = self.asset_info_insertion[subassembly][components[1]]['diameter']
+            self.peg_diameters.append(peg_diameter)
+            self.hole_diameters.append(hole_diameter)
 
             plug_pose = gymapi.Transform()
             plug_pose.p.x = 0.0
@@ -283,6 +292,10 @@ class FactoryEnvInsertion(FactoryBase, FactoryABCEnv):
         self.fingertip_centered_body_id_env = self.gym.find_actor_rigid_body_index(env_ptr, franka_handle,
                                                                                    'panda_fingertip_centered',
                                                                                    gymapi.DOMAIN_ENV)
+
+        # For computing body COM pos
+        self.peg_diameters = torch.tensor(self.peg_diameters, device=self.device).unsqueeze(-1)
+        self.hole_diameters = torch.tensor(self.hole_diameters, device=self.device).unsqueeze(-1)
 
     def _acquire_env_tensors(self):
         """Acquire and wrap tensors. Create views."""
